@@ -4,6 +4,7 @@ author: "Frederico Bertholini"
 subtitle: "Escola de Métodos em Ciência Política"
 format: 
     revealjs:
+      self-contained: true
       lang: pt-BR
       toc: true
       toc-depth: 1
@@ -662,6 +663,9 @@ rbind() # Empilha duas tabelas.
   - Exemplos são sum(), length(), class(), c()
   - Outras, porém, devem ser instaladas para que possam ser utilizadas pelos usuários
   - A maneira com a qual instalamos novas funções, não definidas anteriormente no software, é através de pacotes
+  
+## O que fazem os pacotes
+
   - Pacotes concentram diversas funções para diversas demandas  
  Importação de dados;  
  Organização de banco de dados;  
@@ -669,8 +673,7 @@ rbind() # Empilha duas tabelas.
  Gráficos diferenciados;  
  
  
-
-## O que são pacotes
+## Mais pacotes
  
   - A instalação de qualquer pacote pode ser feita por dentro do R
   - É preciso conexão com a internet, já que o R busca o novo pacote no repositório de pacotes
@@ -689,7 +692,6 @@ install.packages("foreign")
  
 ## Ativando pacotes
  
-
   - As função não ficam disponíveis assim que o pacote termina a instalação
   - Para ativar as funções do pacote, é preciso utilizar a função library()
 ```{r} 
