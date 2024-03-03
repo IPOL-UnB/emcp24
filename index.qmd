@@ -1,0 +1,25 @@
+---
+title: "Escola de Métodos em Ciência Política 2024"
+subtitle: "Curso de R"
+author: "Frederico Bertholini"
+lang: pt-BR
+format: 
+  html:
+    theme: solar
+    logo: logo.png
+---
+
+### Aula 1  - Conhecendo o R
+04.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula1)
+
+### Aula 2 - Tidyverse
+05.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula2)
+
+### Aula 3  - Estruturas de dados e manipulação
+06.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula3)
+
+### Aula 4  - Gráficos (ggplot e extensões)
+07.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula4)
+
+### Aula 5  - Relatórios e apresentações
+08.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula5)
