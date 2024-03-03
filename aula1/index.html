@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.550">
+
+  <meta name="author" content="Frederico Bertholini">
+  <title>Aula 1 - Conhecendo o R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Aula 1 - Conhecendo o R</h1>
+  <p class="subtitle">Escola de Métodos em Ciência Política</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Frederico Bertholini 
+</div>
+</div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Índice</h2>
+<ul>
+<li><a href="#/abrindo-o-r-e-conhecendo-o-software" id="/toc-abrindo-o-r-e-conhecendo-o-software">Abrindo o R e conhecendo o software</a></li>
+<li><a href="#/vetores" id="/toc-vetores">Vetores</a></li>
+<li><a href="#/operações-matemáticas" id="/toc-operações-matemáticas">Operações matemáticas</a></li>
+<li><a href="#/data.frame" id="/toc-data.frame">data.frame</a></li>
+<li><a href="#/pacotes" id="/toc-pacotes">Pacotes</a></li>
+<li><a href="#/importação-de-dados" id="/toc-importação-de-dados">Importação de dados</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="abrindo-o-r-e-conhecendo-o-software" class="title-slide slide level1 center">
+<h1>Abrindo o R e conhecendo o software</h1>
+
+</section>
+<section id="passos-iniciais" class="slide level2">
+<h2>Passos iniciais</h2>
+<ul>
+<li>R é software de <strong>PROGRAMAÇÃO ESTATÍSTICA</strong></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
+<p>Tem dividido com o Python o posto de software mais popular entre cientistas sociais</p>
+</div>
+</div>
+</div>
+<ul>
+<li>Vantagens:<br>
+– Software Livre<br>
+– Documentação completa e acessível<br>
+– Diversidade de arquivos<br>
+– Replicabilidade de rotinas</li>
+</ul>
+</section>
+<section id="um-excel-que-usou-o-suco" class="slide level2">
+<h2>Um Excel que usou o suco?</h2>
+<ul>
+<li>Se é possível fazer no Excel, é possível fazer no R</li>
+<li>Entretanto, se é possível fazer no R, não necessariamente é possível fazer no Excel</li>
+</ul>
+<p>Ambiente de desenvolvimento para cálculos estatísticos e gráficos</p>
+<p>Vários cálculos estatísticos mais sofisticados estão disponíveis no R através de pacotes desenvolvidos pela comunidade</p>
+</section>
+<section id="habilidades-necessárias" class="slide level2">
+<h2>Habilidades necessárias</h2>
+<p>Escrita:<br>
+– Elementos (ex: <code>numeric, character, factor</code>…);<br>
+– Funções básicas (ex: <code>sum(), table(), sd()</code>);<br>
+– Composição do script (ex: <code>c(), for loop</code>);</p>
+<p>Leitura:<br>
+– Identificação de funções;<br>
+– Diferentes soluções;<br>
+– Alertas de erros;</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Importante</strong></p>
+</div>
+<div class="callout-content">
+<p>adquirir <strong>autonomia</strong> com o software</p>
+</div>
+</div>
+</div>
+</section>
+<section id="habilidade-mais-importante" class="slide level2">
+<h2>Habilidade mais importante</h2>
+<p>Dada a multiplicidade de soluções, de alertas de erros e o universo de pacotes com diversas funções</p>
+<p><strong><code>a habilidade mais importante é saber pesquisar no Google</code></strong></p>
+<p>Melhor em inglês pela quantidade de fóruns:</p>
+<p>– Melhor fórum: <a href="https://stackoverflow.com/">Stackoverflow</a></p>
+<p>– <a href="https://community.rstudio.com/">Posit Community</a> despontando</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dica</strong></p>
+</div>
+<div class="callout-content">
+<p>IA como nova ‘habilidade’: além do ChatGPT</p>
+</div>
+</div>
+</div>
+</section>
+<section id="rstudio" class="slide level2">
+<h2>RStudio</h2>
+<ul>
+<li>RStudio é um ambiente para desenvolvimento do R (IDE)</li>
+<li>Ao longo do curso utilizaremos o RStudio<br>
+</li>
+<li>Utilizando nada dos botões ou possibilidades específicas do RStudio</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>Posit (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>)</p>
+</blockquote>
+</blockquote>
+<p><a href="https://posit.cloud/">Posit Cloud for free</a></p>
+</section>
+<section id="aparência-do-rstudio" class="slide level2">
+<h2>Aparência do RStudio</h2>
+
+<img data-src="imgs/1.png" class="r-stretch quarto-figure-center"><p class="caption">Aparência</p></section>
+<section id="básico-do-básico-um-operador-e-um-comando" class="slide level2">
+<h2>Básico do básico: um operador e um comando</h2>
+<p>Linhas escritas no ambiente onde se registra o script (Scripts são arquivos de texto)</p>
+<p>Ctrl + enter (cmd + enter no mac)</p>
+<ul>
+<li>Executa (roda) as funções e programações escritas nas linhas selecionadas</li>
+</ul>
+<p>Hastags</p>
+<ul>
+<li>Insere comentários sem gerar outputs (organizar e registrar dentro dos scripts)</li>
+</ul>
+<p>Fluxos: scripts e projetos</p>
+</section>
+<section id="como-sai-no-r" class="slide level2">
+<h2>Como sai no R?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co">#Insere comentarios sem rodar o comando</span></span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>Importante para organizar e</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="co"># Erro: unexpected symbol in "Importante para"</span></span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a><span class="do">##Registrar o que se vai fazer ou foi feito</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="r-como-calculadora" class="slide level2">
+<h2>R como calculadora</h2>
+<ul>
+<li>Um função primordial e básica do R, como software estatístico, é de calculadora</li>
+<li>O R possui os operadores básicos da matemática como ‘+’ , ‘-’, ’*’ e ‘/’</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">3</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="dv">4</span> <span class="sc">*</span> <span class="dv">9</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="dv">16</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+</section>
+<section id="r-como-calculadora-1" class="slide level2">
+<h2>R como calculadora</h2>
+<ul>
+<li>Assim como na matemática, atenção em relação aos ()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">6</span>) <span class="sc">*</span> <span class="dv">3</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">6</span> <span class="sc">*</span> <span class="dv">3</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Além das funções de exponencial e raiz quadrada</p></li>
+<li><p>Respectivamente, ^ e sqrt()</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">sqrt</span>(<span class="dv">36</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</section>
+<section id="lógica" class="slide level2">
+<h2>Lógica</h2>
+<ul>
+<li>O R permite também avaliações lógicas</li>
+<li>Ou seja, o software possui operadores lógicos afim de fazer testes lógicos com resultados de Verdadeiro ou Falso de acordo com a proposição</li>
+<li>Os principais operadores são <span class="math inline">\(==\)</span>, <span class="math inline">\(&lt;\)</span> , <span class="math inline">\(&gt;\)</span>, <span class="math inline">\(&lt;=\)</span> , <span class="math inline">\(&gt;=\)</span> e <span class="math inline">\(!=\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="dv">3</span> <span class="sc">!=</span> <span class="dv">6</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="lógica-1" class="slide level2">
+<h2>Lógica</h2>
+<ul>
+<li>Testamos também Verdade e Falsidade</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="cn">TRUE</span> <span class="sc">==</span> <span class="cn">TRUE</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="cn">TRUE</span> <span class="sc">&lt;=</span> <span class="cn">FALSE</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<ul>
+<li>Assim como estamos caracteres</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="st">"Python"</span> <span class="sc">==</span> <span class="st">"python"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="st">"Stata"</span> <span class="sc">!=</span> <span class="st">"Sasta"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operadores-lógicos-especiais" class="slide level2">
+<h2>Operadores lógicos especiais</h2>
+<ul>
+<li>Atenção para os operadores e e ou</li>
+<li>O primeiro, para ser verdade, precisa que todos os pressupostos sejam verdadeiros</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>(<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">&amp;</span> (<span class="dv">4</span> <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>O ou, por sua vez, para ser verdade precisa que apenas 1 pressuposto seja verdadeiro</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>(<span class="dv">3</span> <span class="sc">!=</span> <span class="dv">3</span>) <span class="sc">|</span> (<span class="dv">4</span> <span class="sc">!=</span> <span class="dv">5</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="atribuição" class="slide level2">
+<h2>Atribuição</h2>
+<ul>
+<li>Trata-se da famosa ‘setinha’ que indica objetos (valores, vetores, dataframes) para alguma etiqueta</li>
+<li>Dessa maneira, podemos ‘salvar’ os objetos nas etiquetas para utilizarmos através dessas em qualquer momento ao longo do script</li>
+<li>Quando utilizadas em operações, as etiquetas representam aquilo que fora atribuído a elas</li>
+<li>Quando criamos a etiqueta, não geramos outputs, apenas quando rodamos diretamente a etiqueta</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>sorte <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regras-do-uso-da-setinha" class="slide level2">
+<h2>Regras do uso da setinha</h2>
+<ul>
+<li>Atenção, letras maiúsculas e minúsculas importam</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>sorte <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb39-2"><a href=""></a></span>
+<span id="cb39-3"><a href=""></a>Sorte</span>
+<span id="cb39-4"><a href=""></a></span>
+<span id="cb39-5"><a href=""></a><span class="co"># Erro: objeto 'Sorte' não encontrado</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regras-do-uso-da-setinha-1" class="slide level2">
+<h2>Regras do uso da setinha</h2>
+<ul>
+<li>Também não podemos criar etiquetas que começam com números</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="dv">15</span>luck <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb40-2"><a href=""></a></span>
+<span id="cb40-3"><a href=""></a><span class="co"># Erro: unexpected symbol in "15luck"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cuidado com a utilização de etiquetas com o mesmo nome de funções, pode gerar confusão no script</p>
+</section>
+<section id="classes" class="slide level2">
+<h2>Classes</h2>
+<p>Em basicamente tudo que iremos fazer no R, a classe da informação importa Em termos elementares, ou ao nível dos valores, existem três grandes classes:<br>
+- Numeric (númerico);<br>
+- Logical (lógico);<br>
+- Character ou factor (caracteres);</p>
+<p><strong>Para obter a informação sobre a classe, iremos aprender nossa primeira função no R: class()</strong></p>
+</section>
+<section id="númerico" class="slide level2">
+<h2>Númerico</h2>
+<ul>
+<li><code>numeric</code> é a classe composta por valores númericos</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">class</span>(sorte)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<ul>
+<li>Objetos deste tipo permitem funções matemáticas como média, mediana etc…</li>
+</ul>
+</section>
+<section id="númerico-1" class="slide level2">
+<h2>Númerico</h2>
+<ul>
+<li>No caso de valores decimais, utilizamos ponto em vez de vírgula</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>decimal <span class="ot">&lt;-</span> <span class="dv">3</span>,<span class="dv">5</span></span>
+<span id="cb43-2"><a href=""></a></span>
+<span id="cb43-3"><a href=""></a><span class="co"># Erro: ',' inesperado in "decimal &lt;- 3,"</span></span>
+<span id="cb43-4"><a href=""></a></span>
+<span id="cb43-5"><a href=""></a>decimal <span class="ot">&lt;-</span> <span class="fl">3.5</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lógico" class="slide level2">
+<h2>Lógico</h2>
+<ul>
+<li><code>logical</code> é a classe composta por TRUE, FALSE e NA</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>vdd <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb44-2"><a href=""></a></span>
+<span id="cb44-3"><a href=""></a><span class="fu">class</span>(vdd)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Não é preciso escrever sempre TRUE e FALSE, podemos resumir para T e F, respectivamente</p></li>
+<li><p>Por trás dos valores T e F, há valores númericos correspondente a 1 e 0</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>T <span class="sc">+</span> F</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+</section>
+<section id="caracteres" class="slide level2">
+<h2>Caracteres</h2>
+<ul>
+<li><p><code>character</code> é a classe composta por nomes</p></li>
+<li><p>Importante característica é que os nomes devem estar dentro de aspas, caso contrário, o R não reconhecerá como caracter</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>nome <span class="ot">&lt;-</span> <span class="st">"Alvaro"</span></span>
+<span id="cb48-2"><a href=""></a></span>
+<span id="cb48-3"><a href=""></a>nome</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Alvaro"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">class</span>(nome)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</section>
+<section id="caracteres-vs-fatores" class="slide level2">
+<h2>Caracteres vs Fatores</h2>
+<ul>
+<li>Em termos estatísticos, não há diferença entre caracteres e fatores</li>
+<li>Fatores apresentam as categorias por dentro de vetor.</li>
+<li>Em termos de manipulação de dataframes, porém, veremos que esses dois objetos terão tratamento distintos, a começar pela importação da base e a definição de string tratada como factor</li>
+</ul>
+</section></section>
+<section>
+<section id="vetores" class="title-slide slide level1 center">
+<h1>Vetores</h1>
+
+</section>
+<section id="o-que-são-vetores" class="slide level2">
+<h2>O que são vetores?</h2>
+<ul>
+<li>Vetores são combinações de valores em uma estrutura unidimensional</li>
+<li>Ou seja, podem ser combinações de números, valores lógicos, nomes e várias outras possibilidades</li>
+<li>Por exemplo, combinação de valores pares: 2,4,6,8</li>
+<li>Ou a combinações de nomes começando por P: Pedro, Paula, Pietro, Paloma</li>
+<li>Combinação de valores lógico: TRUE, FALSE, TRUE, TRUE</li>
+</ul>
+</section>
+<section id="criação-de-vetores" class="slide level2">
+<h2>Criação de vetores</h2>
+<ul>
+<li>Para criar vetores é importante combinar valores</li>
+<li>A função necessária para a criação de vetores é a função c(), c de <em>combine</em> ou <em>concatenate</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 4 6 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">c</span>(<span class="st">"Pedro"</span>,<span class="st">"Paula"</span>,<span class="st">"Pietro"</span>,<span class="st">"Paloma"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Pedro"  "Paula"  "Pietro" "Paloma"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="etiquetas-para-vetores" class="slide level2">
+<h2>Etiquetas para vetores</h2>
+<ul>
+<li>Assim como fizemos com os valores, atribuímos também etiquetas aos vetores</li>
+<li>Dessa maneira, podemos trabalhar com as sequências ao longo do script, assim como dar razão ou justificativa aos valores combinados</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>n.pares <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>)</span>
+<span id="cb58-2"><a href=""></a></span>
+<span id="cb58-3"><a href=""></a>nomes.com.p <span class="ot">&lt;-</span> </span>
+<span id="cb58-4"><a href=""></a><span class="fu">c</span>(<span class="st">"Pedro"</span>,<span class="st">"Paula"</span>,<span class="st">"Pietro"</span>,<span class="st">"Paloma"</span>) </span>
+<span id="cb58-5"><a href=""></a></span>
+<span id="cb58-6"><a href=""></a>valores.log <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="classes-dos-vetores" class="slide level2">
+<h2>Classes dos vetores</h2>
+<ul>
+<li>Os vetores também possuem classes</li>
+<li>Essas categorias determinam as operações possíveis dentro de um vetor</li>
+<li>Para obter a informação sobre a classe de um vetor, utilizamos a função class()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="fu">class</span>(n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">class</span>(nomes.com.p)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">class</span>(valores.log)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</section>
+<section id="comprimento-de-vetores" class="slide level2">
+<h2>Comprimento de vetores</h2>
+<ul>
+<li>Os vetores podem ser medidos em relação ao seu comprimento</li>
+<li>O seu comprimento define a extensão do vetor, assim como quantos elementos estão presentes dentro da combinação de valores</li>
+<li>O comprimento pode ser medido pela função length()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a><span class="fu">length</span>(n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a><span class="fu">length</span>(nomes.com.p)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">length</span>(valores.log)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="somatório-de-vetores" class="slide level2">
+<h2>Somatório de vetores</h2>
+<ul>
+<li>Para vetores númerico podemos somar os valores de um vetor</li>
+<li>A função se chama sum() que corresponde ao <span class="math inline">\(\sum\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">sum</span>(n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Em vetores com valores lógicos, com TRUE e FALSE, o sum soma o número de T que temos dentro de um vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a><span class="fu">sum</span>(valores.log)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="somatório-de-vetores-1" class="slide level2">
+<h2>Somatório de vetores</h2>
+<ul>
+<li>A função sum() pode se tornar ainda um contador de um teste</li>
+<li>Por exemplo, queremos saber quantos nomes são iguais ao de Pedro no vetor ‘nomes.com.p’</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>teste1 <span class="ot">&lt;-</span> nomes.com.p <span class="sc">==</span> <span class="st">"Pedro"</span></span>
+<span id="cb75-2"><a href=""></a></span>
+<span id="cb75-3"><a href=""></a><span class="fu">sum</span>(teste1)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>teste1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Queremos selecionar no vetor nomes.com.p o segundo elemento que é Paula</li>
+<li>Vejamos, primeiro, como se compõe o vetor de caracteres nomes.com.p e a lógica do posicionamento dentro do vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>nomes.com.p</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Pedro"  "Paula"  "Pietro" "Paloma"</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-1" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Vamos testar se Paula se inclui dentro do vetor sem termos que ver no console</li>
+<li>As vezes, vetores são maiores do que temos como exemplo</li>
+<li>Para o teste lógico, utilizamos o operador %in%, que retorna TRUE, caso o valor esteja incluso no vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="st">"Paula"</span> <span class="sc">%in%</span> nomes.com.p</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-2" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Algumas operações se restrigem à determinados elementos ou à um conjunto deles incluso dentro de um vetor</li>
+<li>Para realizar tais procedimentos precisamos saber escolher elementos</li>
+<li>Para isso, utilizaremos o operador ‘[]’ depois de apontar o vetor</li>
+<li>Mais especificamente: Vetor; []; Posição ou regra;</li>
+</ul>
+</section>
+<section id="seleção-de-elementos-3" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Para escolhar Paula, portanto, vamos definir como a segunda posição dentro do vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a>nomes.com.p[<span class="dv">2</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Paula"</code></pre>
+</div>
+</div>
+<ul>
+<li>O posicionamento dos nomes ao longo do vetor determina como seleciona-lo individualmente</li>
+<li>Porém, podemos selecionar através do valor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a>nomes.com.p[nomes.com.p <span class="sc">==</span> <span class="st">"Paula"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Paula"</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-4" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Selecionamos também o último valor do vetor nomes.com.p</li>
+<li>Sabemos que o vetor possui 4 valores utilizando a função length()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">length</span>(nomes.com.p)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-5" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Assim o último valor é igual a 4</li>
+<li>Para selecionarmos o último valor, ou definimos como a posição 4 ou apenas o length() do vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a>nomes.com.p[<span class="dv">4</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Paloma"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a>nomes.com.p[<span class="fu">length</span>(nomes.com.p)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Paloma"</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-6" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Para seleção de elementos através de regras, podemos utilizar o vetor númerico de n.pares</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a>n.pares  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>)</span>
+<span id="cb93-2"><a href=""></a></span>
+<span id="cb93-3"><a href=""></a>n.pares</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 4 6 8</code></pre>
+</div>
+</div>
+<ul>
+<li>O objetivo aqui é selecionar os elementos maiores que 5, que é a mediana do vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="fu">median</span>(n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-elementos-7" class="slide level2">
+<h2>Seleção de elementos</h2>
+<ul>
+<li>Selecionamos, assim, os elementos acima da mediana do vetor n.pares, que são os valores 6 e 8</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a>n.pares[n.pares <span class="sc">&gt;</span> <span class="dv">5</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6 8</code></pre>
+</div>
+</div>
+<ul>
+<li>Ou ainda podemos definir o valor 5 como o valor da mediana</li>
+<li>O resultado é o mesmo, porém, deixa claro ao leitor do seu script que se trata dos valores acima da mediana do vetor n.pares</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a>n.pares[n.pares <span class="sc">&gt;</span> <span class="fu">median</span>(n.pares)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6 8</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="operações-matemáticas" class="title-slide slide level1 center">
+<h1>Operações matemáticas</h1>
+
+</section>
+<section id="operações-com-vetores" class="slide level2">
+<h2>Operações com vetores</h2>
+<ul>
+<li>Em vetores numéricos, podemos fazer operações matemáticas a partir do seu posicionamento</li>
+<li>Vamos calcular o alcance do vetor “n.pares”</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="co">#ultimo elemento </span></span>
+<span id="cb101-2"><a href=""></a>n.pares[<span class="fu">length</span>(n.pares)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a><span class="co">#primeiro elemento</span></span>
+<span id="cb103-2"><a href=""></a>n.pares[<span class="dv">1</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<ul>
+<li>Subtraindo esses dois elementos, temos o alcance do vetor</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a>n.pares[<span class="fu">length</span>(n.pares)] <span class="sc">-</span> n.pares[<span class="dv">1</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</section>
+<section id="operações-com-vetores-1" class="slide level2">
+<h2>Operações com vetores</h2>
+<ul>
+<li>Ainda em vetores numéricos, vamos calcular vetores com regras</li>
+<li>Selecionamos elementos maiores que 5</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a>n.pares[n.pares <span class="sc">&gt;=</span> <span class="dv">5</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6 8</code></pre>
+</div>
+</div>
+<ul>
+<li>Queremos duplicar os valores inclusos dentro da condição</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a>n.pares[n.pares <span class="sc">&gt;=</span> <span class="dv">5</span>] <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12 16</code></pre>
+</div>
+</div>
+<ul>
+<li>Por fim, operacionar um conjunto com um elemento</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href=""></a>n.pares[n.pares <span class="sc">&gt;=</span> <span class="dv">5</span>] <span class="sc">*</span> n.pares[<span class="dv">1</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12 16</code></pre>
+</div>
+</div>
+</section>
+<section id="conjuntos" class="slide level2">
+<h2>Conjuntos</h2>
+<ul>
+<li>Utilizamos a teoria de conjuntos no R com a função de manipular e identificar elementos comuns ou diferente entre vetores</li>
+<li>Já temos o vetor “n.pares” e vamos criar um vetor com números naturais</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href=""></a>n.naturais <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
+<span id="cb113-2"><a href=""></a>n.naturais</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 1 2 3 4 5 6 7 8 9</code></pre>
+</div>
+</div>
+<ul>
+<li>Se perguntarmos por valores que não estão no vetor “n.naturais”, o resultado será conjunto vazio</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href=""></a>n.naturais[n.naturais <span class="sc">==</span> <span class="dv">10</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>numeric(0)</code></pre>
+</div>
+</div>
+</section>
+<section id="conjuntos-1" class="slide level2">
+<h2>Conjuntos</h2>
+<ul>
+<li>Outro ponto importante é saber se os elementos estão contidos dentro de outro vetor</li>
+<li>A pergunta a se fazer é: os elementos do vetor “n.partidos” está contido no vetor “n.naturais”</li>
+<li>No R, contidos é igual a %in%</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href=""></a>n.pares <span class="sc">%in%</span> n.naturais</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="conjuntos-2" class="slide level2">
+<h2>Conjuntos</h2>
+<ul>
+<li>Isto é, o vetor “n.pares” está contido no vetor “n.naturais” e é um subconjunto</li>
+<li>Outra maneira é utilizando a função is.element()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href=""></a><span class="fu">is.element</span>(n.pares,n.naturais)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="conjuntos-3" class="slide level2">
+<h2>Conjuntos</h2>
+<ul>
+<li>Para encontrar os valores exclusivos de um conjunto, vamos utilizar a escrita da seleção de elementos</li>
+<li>Podemos incluir a notação de “!”, que quer dizer diferente</li>
+<li>Portanto, selecionamos os valores que estão contido no conjunto dos naturais, porém não no conjunto dos valores pares</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href=""></a>n.naturais[<span class="sc">!</span><span class="fu">is.element</span>(n.naturais,n.pares)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 1 3 5 7 9</code></pre>
+</div>
+</div>
+</section>
+<section id="conjuntos-4" class="slide level2">
+<h2>Conjuntos</h2>
+<ul>
+<li>Por fim, vamos testar se um valor está presente em um desses vetores</li>
+<li>Testaremos os valores 1, 11 e 21</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a><span class="dv">1</span> <span class="sc">%in%</span> <span class="fu">c</span>(n.naturais,n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a><span class="dv">11</span> <span class="sc">%in%</span> <span class="fu">c</span>(n.naturais,n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href=""></a><span class="dv">21</span> <span class="sc">%in%</span> <span class="fu">c</span>(n.naturais,n.pares)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<ul>
+<li>Assim, não temos os valores 11 e 21 em nenhum dos vetores, entendidos como conjuntos</li>
+</ul>
+</section></section>
+<section>
+<section id="data.frame" class="title-slide slide level1 center">
+<h1>data.frame</h1>
+
+</section>
+<section id="data.frame-1" class="slide level2">
+<h2>data.frame</h2>
+<ul>
+<li><p>Um <code>data.frame</code> é o mesmo que uma tabela do SQL ou uma planilha Excel</p></li>
+<li><p>seus dados provavelmente serão importados para um objeto data.frame</p></li>
+<li><p>data.frame’s são listas especiais em que todos os elementos possuem o mesmo comprimento.</p></li>
+<li><p>Cada elemento dessa lista pode ser pensado como uma coluna da tabela - ou como uma variável. Uso do ‘$’</p></li>
+<li><p>Seu comprimento representa o número de linhas - ou seja, de observações</p></li>
+</ul>
+</section>
+<section id="data.frame-de-perto" class="slide level2">
+<h2>data.frame de perto</h2>
+<ul>
+<li>Como data.frames’s são listas, suas colunas podem ser de classes diferentes. Essa é a grande diferença entre data.frame’s e matrizes.</li>
+</ul>
+<p>Funções úteis:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href=""></a><span class="fu">head</span>() <span class="co"># Mostra as primeiras 6 linhas.</span></span>
+<span id="cb129-2"><a href=""></a><span class="fu">tail</span>() <span class="co"># Mostra as últimas 6 linhas.</span></span>
+<span id="cb129-3"><a href=""></a><span class="fu">dim</span>() <span class="co"># Número de linhas e de colunas.</span></span>
+<span id="cb129-4"><a href=""></a><span class="fu">names</span>() <span class="co"># Os nomes das colunas (variáveis).</span></span>
+<span id="cb129-5"><a href=""></a><span class="fu">str</span>() <span class="co"># Estrutura do data.frame. Mostra, entre outras coisas, as &gt;classes de cada coluna.</span></span>
+<span id="cb129-6"><a href=""></a><span class="fu">cbind</span>() <span class="co"># Acopla duas tabelas lado a lado.</span></span>
+<span id="cb129-7"><a href=""></a><span class="fu">rbind</span>() <span class="co"># Empilha duas tabelas.</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estrutura-de-dados" class="slide level2">
+<h2>Estrutura de dados</h2>
+
+<img data-src="imgs/dados.png" class="r-stretch"></section></section>
+<section>
+<section id="pacotes" class="title-slide slide level1 center">
+<h1>Pacotes</h1>
+
+</section>
+<section id="o-que-são-pacotes" class="slide level2">
+<h2>O que são pacotes</h2>
+<ul>
+<li>O R possui diversas funções já instaladas dentro da sua programação</li>
+<li>Exemplos são sum(), length(), class(), c()</li>
+<li>Outras, porém, devem ser instaladas para que possam ser utilizadas pelos usuários</li>
+<li>A maneira com a qual instalamos novas funções, não definidas anteriormente no software, é através de pacotes</li>
+<li>Pacotes concentram diversas funções para diversas demandas<br>
+Importação de dados;<br>
+Organização de banco de dados;<br>
+Análises estatísticas específicas;<br>
+Gráficos diferenciados;</li>
+</ul>
+</section>
+<section id="o-que-são-pacotes-1" class="slide level2">
+<h2>O que são pacotes</h2>
+<ul>
+<li>A instalação de qualquer pacote pode ser feita por dentro do R</li>
+<li>É preciso conexão com a internet, já que o R busca o novo pacote no repositório de pacotes</li>
+<li>A função para instalar pacotes é <code>install.packages()</code></li>
+<li>O nome do pacote deve vir entre aspas dentro dos parênteses</li>
+</ul>
+</section>
+<section id="instalando-pacote" class="slide level2">
+<h2>Instalando pacote</h2>
+<ul>
+<li>Podemos começar instalando o pacote para importação de bases de dados: foreign</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"foreign"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Após alguns segundos, e algumas mensagens no console, a instalação será efetivada</li>
+<li>Cada pacote, inclusive o foreign, tem uma documentação disponível na internet</li>
+<li>Nessa documentação estão disponíveis as funções que o pacote possui, além do nome do seu criador</li>
+</ul>
+</section>
+<section id="ativando-pacotes" class="slide level2">
+<h2>Ativando pacotes</h2>
+<ul>
+<li>As função não ficam disponíveis assim que o pacote termina a instalação</li>
+<li>Para ativar as funções do pacote, é preciso utilizar a função library()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href=""></a><span class="fu">library</span>(foreign)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Repare, que uma vez instalado, o nome do pacote não precisa mais estar entre aspas</li>
+</ul>
+</section>
+<section id="ativar-pacotes" class="slide level2">
+<h2>Ativar pacotes</h2>
+<ul>
+<li>Para começarmos o procedimento de instalação do pacote, seguimos os passos a seguir:<br>
+– Caso não esteja instalado, instalar o pacote através da função install.packages();<br>
+– Para ativar o pacote, utilizar a função library() sem as aspas no nome do pacote instalado</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"foreign"</span>)</span>
+<span id="cb132-2"><a href=""></a></span>
+<span id="cb132-3"><a href=""></a><span class="fu">library</span>(foreign)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Uma vez instalado o pacote, não é preciso instalar mais, a não ser que você reinstale o R</li>
+</ul>
+</section></section>
+<section>
+<section id="importação-de-dados" class="title-slide slide level1 center">
+<h1>Importação de dados</h1>
+
+</section>
+<section id="importação-uma-das-tarefas-que-demandam-mais-atenção" class="slide level2">
+<h2>importação: uma das tarefas que demandam mais atenção</h2>
+<ul>
+<li>É preciso ter um conhecimento prévio de como sua base externa está constituída</li>
+<li>Outra informação importante é a <strong>extensão do arquivo</strong> da base (<code>.txt, .xlsx, .csv</code>)</li>
+</ul>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cuidado</strong></p>
+</div>
+<div class="callout-content">
+<p>Primeiro, você deve importar seus dados para o R. Isso geralmente significa que você pega dados armazenados em um arquivo, um banco de dados ou uma API da web e importa em uma tabela (data frame) no R. Se você não conseguir importar seus dados para o R, não poderá fazer ciência de dados com eles!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="diretório-de-trabalho" class="slide level2">
+<h2>Diretório de trabalho</h2>
+<ul>
+<li>Primeiramente, a informação que deve ser dada ao software é onde está a base - diretório de trabalho</li>
+<li>A função necessária é setwd() que define o diretório da sua seção no R</li>
+<li>Dentro da função, iremos inserir o local do arquivo<br>
+Em caso de Windows, inverta as barras ou duplique;<br>
+Não se esqueça das aspas;</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href=""></a><span class="fu">setwd</span>(<span class="st">"/Volumes//Volumes/MacSSD480/git_proj/emcp2024/aula1"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sem-pacotes" class="slide level2">
+<h2>sem pacotes</h2>
+<ul>
+<li>Esse diretório definido significa que as bases e os gráficos produzidos serão enviados para essa pasta</li>
+<li>Finalmente, vamos importar as bases de dados</li>
+<li>Primeiro, vamos importar a base de extensão txt com o nome baserm</li>
+<li>Não é preciso de pacote para esse procedimento</li>
+</ul>
+</section>
+<section id="importando-txt" class="slide level2">
+<h2>importando txt</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a>lines <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"dados/baserm.txt"</span>)</span>
+<span id="cb134-2"><a href=""></a></span>
+<span id="cb134-3"><a href=""></a>baserm <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">text =</span> lines, <span class="at">sep =</span> <span class="st">'</span><span class="sc">\t</span><span class="st">'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Repare que definimos a base dentro das aspas e com a extensão</li>
+<li>Na segunda linha, o primeiro argumento é o texto, o segundo argumento trata de como os dados estão separados, geralmente txt vem separado assim</li>
+</ul>
+</section>
+<section id="foreign" class="slide level2">
+<h2>foreign</h2>
+<ul>
+<li>No pacote foreign, a forma mais genérica de importação da base é o read.table()</li>
+<li>Entretanto, o pacote apresenta uma série de especialidades, a depender da extensão em questão</li>
+<li>Para CSV, vimos que tem a read.csv(). Já para dta, base de origem do stata, temos a função read.dta()</li>
+</ul>
+</section>
+<section id="readxl" class="slide level2">
+<h2>readxl</h2>
+<ul>
+<li>O pacote foreign não possui a extensão xlsx e xls, extensão muito encontrada e comum entre as bases de dados disponíveis</li>
+<li>Para isso, vamos instalar um novo pacote readxl</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Esse pacote disponibiliza as funções read_xls() e read_xlsx()</li>
+</ul>
+</section>
+<section id="ativando-funções-do-readxl" class="slide level2">
+<h2>Ativando funções do readxl</h2>
+<ul>
+<li>Vamos ativar as funções disponíveis no pacote readxl com a função library()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a><span class="fu">library</span>(readxl)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Vamos importar a base controle_cgu_municípios.xlsx</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href=""></a>cgu <span class="ot">&lt;-</span> </span>
+<span id="cb137-2"><a href=""></a><span class="fu">read_xlsx</span>(<span class="st">"dados/controle_cgu_municípios.xlsx"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importando-com-readxl" class="slide level2">
+<h2>Importando com readxl</h2>
+<ul>
+<li>Repare que acessamos apenas a primeira página da base</li>
+<li>Para acessarmos a segunda páginas, utilizamos o argumento sheet=2</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>cgu <span class="ot">&lt;-</span> </span>
+<span id="cb138-2"><a href=""></a><span class="fu">read_xlsx</span>(<span class="st">"dados/controle_cgu_municípios.xlsx"</span>, </span>
+<span id="cb138-3"><a href=""></a><span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Alguns sinais de alerta surgem, porém não se trata de erro</li>
+</ul>
+</section>
+<section id="importação-por-pacote" class="slide level2">
+<h2>Importação por pacote</h2>
+<ul>
+<li>Por fim, podemos importar dados através de pacotes</li>
+<li>Após ativar o pacote “ElectionsBR”, a função legend_fed() fica disponível para a importação</li>
+<li>Como toda a função, ou quase todas, possui argumentos importantes:
+<ul>
+<li>‘year =’ se refere ao ano de extração</li>
+<li>‘uf =’ se refere à UF</li>
+</ul></li>
+</ul>
+</section>
+<section id="importação" class="slide level2">
+<h2>Importação</h2>
+<ul>
+<li>Vamos começar importando dados de coalizões pré-eleitorais (coligações) do DF em 2018, nos retornando um objeto em ‘tbl_df’ e data frame</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href=""></a><span class="fu">library</span>(electionsBR)</span>
+<span id="cb139-2"><a href=""></a>leg_df_2018 <span class="ot">&lt;-</span> <span class="fu">legend_fed</span>(<span class="at">year =</span> <span class="dv">2018</span>,<span class="at">uf=</span><span class="st">"DF"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |========                                                              |  11%
+  |                                                                            
+  |=============                                                         |  18%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |============================                                          |  39%
+  |                                                                            
+  |=======================================                               |  56%
+  |                                                                            
+  |=========================================                             |  59%
+  |                                                                            
+  |=============================================                         |  64%
+  |                                                                            
+  |===============================================                       |  67%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |====================================================                  |  74%
+  |                                                                            
+  |======================================================                |  77%
+  |                                                                            
+  |========================================================              |  81%
+  |                                                                            
+  |===========================================================           |  84%
+  |                                                                            
+  |=============================================================         |  87%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
+  |==================================================================    |  94%
+  |                                                                            
+  |===================================================================== |  99%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+</div>
+<pre><code>  - Provavelmente, demorará alguns segundos, até minutos, para a importação
+  - Além disso, essa técnica demanda acesso à internet</code></pre>
+</section>
+<section id="visualizando-a-base" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Primeira coisa importante de se informar é a classe desses objetos</li>
+<li>Temos 4 objetos: baserm, cgu, educacao e pnad2018</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href=""></a><span class="fu">class</span>(baserm)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a><span class="fu">class</span>(cgu)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href=""></a><span class="fu">class</span>(leg_df_2018)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizando-a-base-1" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Uma visão completa da base é o comando View()</li>
+<li>Entretanto, cuidado, dependendo do tamanho da base, podemos travar o software</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href=""></a><span class="fu">View</span>(baserm)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Repare no V maiúsculo, lembre-se que o R é bastante sensível na sua linguagem</li>
+<li>O View() abre uma nova aba com a base no formato de grade</li>
+<li>Podemos, assim, visualizar a base de dados na forma mais intuitiva</li>
+</ul>
+</section>
+<section id="visualizando-a-base-2" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Porém, para bases como a pnad2018, por exemplo, sabemos que é grande demais para sua visualização ser feita através do View()</li>
+<li>Algumas funções podem nos ajudar nessa tarefa</li>
+<li>A primeira é o dim, que as dimensões da base</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href=""></a><span class="fu">dim</span>(leg_df_2018)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 251  23</code></pre>
+</div>
+</div>
+<ul>
+<li>O primeiro valor sempre retrata o número de linhas, ou observações, enquanto o segundo valor apresenta o número de colunas, ou variáveis</li>
+<li>A função ncol() e length() também indicam quantas colunas, ou variáveis estão presentes na base</li>
+</ul>
+</section>
+<section id="visualizando-a-base-3" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Outra função importante na visualização de bases de dados é a lista de nomes</li>
+<li>A função names() descreve as variáveis presentes na base</li>
+<li>Isso facilita no momento de selecionar as variáveis que entrarão na análise de vocês</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href=""></a><span class="fu">names</span>(cgu)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "COD.IBGE7"               "REGIÃO"                 
+ [3] "UF"                      "PORTE"                  
+ [5] "MUNICÍPIO"               "falha"                  
+ [7] "tempo_falha_02"          "tempo_falha_01"         
+ [9] "reicidência_falha"       "ano_eleitoral"          
+[11] "PERCENT_ganhador_2000"   "PERCENT_ganhador_2004"  
+[13] "PERCENT_ganhador_2008"   "PERCENT_ganhador_2012"  
+[15] "PERCENT_ganhador_médio"  "competição_pol_alta"    
+[17] "Ideologia1"              "Ideologia2"             
+[19] "Ideologia3"              "ideologia 4"            
+[21] "ideologia_media"         "IDHM_2000"              
+[23] "IDHM_2010"               "IDHM_media"             
+[25] "tm 2000"                 "tm 2004"                
+[27] "tm 2008"                 "tm2012"                 
+[29] "tamanho setor media"     "NEP1"                   
+[31] "NEP2"                    "NEP3"                   
+[33] "NEP4"                    "NEP_medio"              
+[35] "Pibpercapita2000"        "Pibpercapita2004"       
+[37] "Pibpercapita2008"        "Pibpercapita2012"       
+[39] "Pibpercapita_medio"      "TaxadeUrbanização2000"  
+[41] "TaxadeUrbanização2004"   "TaxadeUrbanização2008"  
+[43] "TaxadeUrbanização_media" "Arrec_Prop2000"         
+[45] "Arrec_Prop2004"          "Arrec_Prop2008"         
+[47] "Arrec_Prop2012"          "Arrec_Prop_media"       
+[49] "POP"                     "LN_POP"                 
+[51] "N_NE"                    "Viznho"                 
+[53] "sul"                     "centro_Oeste"           
+[55] "Sudeste"                 "Nordeste"               </code></pre>
+</div>
+</div>
+</section>
+<section id="visualizando-a-base-4" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Outra função possível é o str()</li>
+<li>Essa função apresenta o nome das variáveis, a classe de cada uma delas e os primeiros valores</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href=""></a><span class="fu">str</span>(leg_df_2018)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [251 × 23] (S3: tbl_df/tbl/data.frame)
+ $ DT_GERACAO             : chr [1:251] "25/02/2024" "25/02/2024" "25/02/2024" "25/02/2024" ...
+ $ HH_GERACAO             : 'hms' num [1:251] 11:01:14 11:01:14 11:01:14 11:01:14 ...
+  ..- attr(*, "units")= chr "secs"
+ $ ANO_ELEICAO            : num [1:251] 2018 2018 2018 2018 2018 ...
+ $ CD_TIPO_ELEICAO        : num [1:251] 2 2 2 2 2 2 2 2 2 2 ...
+ $ NM_TIPO_ELEICAO        : chr [1:251] "ELEIÇÃO ORDINÁRIA" "ELEIÇÃO ORDINÁRIA" "ELEIÇÃO ORDINÁRIA" "ELEIÇÃO ORDINÁRIA" ...
+ $ NR_TURNO               : num [1:251] 1 1 1 1 1 1 1 1 1 1 ...
+ $ CD_ELEICAO             : num [1:251] 297 297 297 297 297 297 297 297 297 297 ...
+ $ DS_ELEICAO             : chr [1:251] "Eleições Gerais Estaduais 2018" "Eleições Gerais Estaduais 2018" "Eleições Gerais Estaduais 2018" "Eleições Gerais Estaduais 2018" ...
+ $ DT_ELEICAO             : chr [1:251] "07/10/2018" "07/10/2018" "07/10/2018" "07/10/2018" ...
+ $ SG_UF                  : chr [1:251] "DF" "DF" "DF" "DF" ...
+ $ SG_UE                  : chr [1:251] "DF" "DF" "DF" "DF" ...
+ $ NM_UE                  : chr [1:251] "DISTRITO FEDERAL" "DISTRITO FEDERAL" "DISTRITO FEDERAL" "DISTRITO FEDERAL" ...
+ $ CD_CARGO               : num [1:251] 4 4 10 6 5 8 9 6 10 6 ...
+ $ DS_CARGO               : chr [1:251] "VICE-GOVERNADOR" "VICE-GOVERNADOR" "2º SUPLENTE" "DEPUTADO FEDERAL" ...
+ $ TP_AGREMIACAO          : chr [1:251] "COLIGAÇÃO" "COLIGAÇÃO" "COLIGAÇÃO" "COLIGAÇÃO" ...
+ $ NR_PARTIDO             : num [1:251] 14 77 33 19 51 20 43 21 77 20 ...
+ $ SG_PARTIDO             : chr [1:251] "PTB" "SOLIDARIEDADE" "PMN" "PODE" ...
+ $ NM_PARTIDO             : chr [1:251] "PARTIDO TRABALHISTA BRASILEIRO" "SOLIDARIEDADE" "PARTIDO DA MOBILIZAÇÃO NACIONAL" "PODEMOS" ...
+ $ SQ_COLIGACAO           : num [1:251] 7e+10 7e+10 7e+10 7e+10 7e+10 ...
+ $ NM_COLIGACAO           : chr [1:251] "JUNTOS DE VOCÊ" "UNIDOS PELO DF" "JUNTOS DE VOCÊ" "UNIDOS PELO DF 1" ...
+ $ DS_COMPOSICAO_COLIGACAO: chr [1:251] "PROS / PTB / PHS / PATRIOTA / PMN / PTC / PMB" "PSD / PRB / PPS / SOLIDARIEDADE / PODE / PSC" "PROS / PTB / PHS / PATRIOTA / PMN / PTC / PMB" "PRB / PODE / PPS / SOLIDARIEDADE / PSC / PSD" ...
+ $ CD_SITUACAO_LEGENDA    : chr [1:251] "D" "D" "D" "D" ...
+ $ DS_SITUACAO            : chr [1:251] "DEFERIDO" "DEFERIDO" "DEFERIDO" "DEFERIDO" ...
+ - attr(*, ".internal.selfref")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+</section>
+<section id="visualizando-a-base-5" class="slide level2">
+<h2>Visualizando a base</h2>
+<ul>
+<li>Finalmente, a função head() e tail()</li>
+<li>A primeira função apresenta os primeiros valores de uma base de dados</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href=""></a><span class="fu">head</span>(baserm,<span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sigla cod.ibge  estado anoeleitoral1990 anoeleitoral1991 anoeleitoral1992
+1    AC       12    Acre                1                0                0
+2    AL       27 Alagoas                1                0                0
+  anoeleitoral1993 anoeleitoral1994 anoeleitoral1995 anoeleitoral1996
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral1997 anoeleitoral1998 anoeleitoral1999 anoeleitoral2000
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral2001 anoeleitoral2002 anoeleitoral2003 anoeleitoral2004
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral2005 anoeleitoral2006 anoeleitoral2007 anoeleitoral2008
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral2009 anoeleitoral2010 anoeleitoral2011 anoeleitoral2012
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral2013 anoeleitoral2014 anoeleitoral2015 anoeleitoral2016
+1                0                1                0                0
+2                0                1                0                0
+  anoeleitoral2017 vitoria1990.1 vitoria1994.1 vitoria1998.1 vitoria2002.1
+1                0         28.64         46.80         57.70         46.81
+2                0         49.76         79.39         58.09         52.93
+  vitoria2006.1 vitoria2010.1 vitoria2014.1 vitoria2017.1 derrota1990.1
+1         53.05         50.51         49.73            NA         28.34
+2         55.85         39.58         52.16            NA         44.65
+  derrota1994.1 derrota1998.1 derrota2002.1 derrota2006.1 derrota2010.1
+1         27.30         26.30         33.64         35.12         49.18
+2          9.97         38.95         40.17         30.51         29.16
+  derrota2014.1 derrota2017.1 marge1990 marge1994 marge1998 marge2002 marge2006
+1         30.10            NA      0.30     19.50     31.40     13.17     17.93
+2         33.92            NA      5.11     69.42     19.14     12.76     25.34
+  marge2010 marge2014 marge2017 vitoria1990.2 vitoria1994.2 vitoria1998.2
+1      1.33     19.63        NA         54.61         53.66            NA
+2     10.42     18.24        NA         65.97            NA            NA
+  vitoria2002.2 vitoria2006.2 vitoria2010.2 vitoria2014.2 vitoria2017.2
+1            NA            NA            NA         51.29            NA
+2            NA            NA         52.74            NA            NA
+  derrota1990.2 derrota1994.2 derrota1998.2 derrota2002.2 derrota2006.2
+1         45.39         46.34            NA            NA            NA
+2         34.03            NA            NA            NA            NA
+  derrota2010.2 derrota2014.2 derrota2017.2 segunt.1990 segunt.1994 segunt.1998
+1            NA         48.71            NA           1           1           0
+2         47.26            NA            NA           1           0           0
+  segunt.2002 segunt.2006 segunt.2010 segunt.2014 segunt.2017
+1           0           0           0           1           0
+2           0           0           1           0           0
+                       colig.venc1990             colig.venc1994
+1                         PDS/PFL/PRN                 PPR/PP/PFL
+2 PSC/PMDB/PFL/PSDB/PDT/PTB/PMN/PTdoB PMDB/PTB/PSDB/PL/PSD/PCdoB
+                                           colig.venc1998
+1       PT/PSDB/PCdoB/PDT/PSB/PPS/PV/PMN/PTB/PL/PSL/PTdoB
+2 PSB/PT/PDT/PCdoB/PPS/PTdoB/PRONA/PRP/PV/PTN/PSN/PMN/PST
+                         colig.venc2002              colig.venc2006
+1         PT/PL/PCdoB/PV/PMN/PSDC/PTdoB PT/PP/PL/PSB/PCdoB/PMN/PRTB
+2 PSB/PST/PAN/PHS/PSC/PTC/PSDC/PV/PRONA         PSDB/PMDB/PPS/PTdoB
+                                                   colig.venc2010
+1 PT/PP/PRB/PDT/PTN/PR/PSDC/PHS/PTC/PSB/PV/PRP/PCB/PTB/PSTU/PCdoB
+2                                         PP/PSC/PPS/DEM/PSB/PSDB
+                                                  colig.venc2014 colig.venc2017
+1 PT/PDT/PCdoB/PSB/PTB/PCB/PSL/PRB/PSDC/PTN/PPL/PROS/PRP/PHS/PEN           &lt;NA&gt;
+2                PMDB/PT/PDT/PTB/PCdoB/PSD/PSC/PROS/PV/PTdoB/PHS           &lt;NA&gt;
+  cent.venc1990 cent.venc1994 cent.venc1998 cent.venc2002 cent.venc2006
+1           PDS           PPR            PT            PT            PT
+2           PSC          PMDB           PSB           PSB          PSDB
+  cent.venc2010 cent.venc2014 cent.venc2017         colig.derr1990
+1            PT            PT          &lt;NA&gt;       PT/PDT/PCB/PCdoB
+2          PSDB          PMDB          &lt;NA&gt; PRN/PDC/PL/PTR/PST/PRP
+          colig.derr1994        colig.derr1998        colig.derr2002
+1          PMDB/PSDB/PDT               PFL/PPB PMDB/PSDB/PFL/PPB/PST
+2 PP/PPR/PFL/PSC/PRN/PMN PTB/PSDB/PFL/PGT/PMDB  PRTB/PTB/PPS/PPB/PFL
+        colig.derr2006                      colig.derr2010
+1 PPS/PMDB/PDT/PTC/PHS PSDB/PMDB/DEM/PSL/PSC/PPS/PMN/PTdoB
+2    PTB/PMN/PFL/PV/PP PDT/PT/PMDB/PR/PSDC/PRP/PCdoB/PTdoB
+                            colig.derr2014 colig.derr2017 cent.derr1990
+1 PSDB/PMDB/PP/PSC/PSD/PR/PPS/PTdoB/SD/PTC           &lt;NA&gt;            PT
+2        PP/PSB/DEM/PR/PPS/SD/PSL/PSDC/PRP           &lt;NA&gt;           PRN
+  cent.derr1994 cent.derr1998 cent.derr2002 cent.derr2006 cent.derr2010
+1          PMDB           PFL          PMDB           PPS          PSDB
+2            PP           PTB          PRTB           PTB           PDT
+  cent.derr2014 cent.derr2017      pib1990      pib1991      pib1992
+1          PSDB          &lt;NA&gt; 8,5046506371 8,7232716989 8,5758084005
+2            PP          &lt;NA&gt; 6,1245303676 6,1700559571 6,3226355082
+       pib1993      pib1994      pib1995      pib1996      pib1997      pib1998
+1 8,5919435813 8,4737417079 8,5777487009 8,5137013716 8,2219297645 8,3880379051
+2 6,0055725931  6,362685085  6,181753266 6,1250000647 6,3801014987  6,447201319
+       pib1999      pib2000      pib2001      pib2002      pib2003      pib2004
+1  8,304872692 8,4004032965 8,4772487716 8,6074182777 8,7019837683 9,2998229259
+2 6,2677884172 6,3133529976 6,3528049829 6,2872324787  6,178023009 6,3815555297
+       pib2005      pib2006       pib2007       pib2008       pib2009
+1  9,396913016 9,6611772592 10,7836698517 11,1098707418 11,0597301472
+2 6,6081828111 6,8190719202  7,1293278871  7,2077456254  7,2927619283
+        pib2010       pib2011 presidente_ass1990 presidente_ass1994
+1 11,5674100019 11,0150052537                PDS                PPB
+2  7,8742100008  8,4879911718               &lt;NA&gt;               &lt;NA&gt;
+  presidente_ass1998 presidente_ass2002 presidente_ass2006 presidente_ass2010
+1                PPB                PMN                PPR                PEN
+2               &lt;NA&gt;               &lt;NA&gt;               &lt;NA&gt;               &lt;NA&gt;
+  presidente_ass2014 alinhamento1990 alinhamento1994 alinhamento1998
+1                 PT               1               0               0
+2               PMDB              NA              NA              NA
+  alinhamento2002 alinhamento2006 alinhamento2010 alinhamento2014  nep1994
+1               0               0               0               1 2.027088
+2              NA              NA              NA               1 4.300454
+        tampub1990       tampub1991       tampub1992       tampub1993
+1 611411,513586656  536496,02078722 608472,003975918 628730,202973373
+2 1313572,46142367 1194027,27279608 1028453,06094235 1347342,39625056
+        tampub1994       tampub1995       tampub1996       tampub1997
+1 759921,483162687 702943,384175584 641316,605942853  732135,48830176
+2 1312023,68646294 1383956,67383895 1801731,17072279 1759142,06212779
+        tampub1998       tampub1999       tampub2000       tampub2001
+1 791582,505357824 769742,256433218 709631,314458073 696843,832285717
+2 1828943,13052009 1775942,55060186 1773535,41143224 1794722,67176703
+        tampub2002       tampub2003       tampub2004       tampub2005
+1 792129,607169136 790293,863518309 812197,028281624 865132,591797147
+2 1784143,23672935 1759563,77863612 1795456,15261078 1912450,83760713
+        tampub2006       tampub2007       tampub2008       tampub2009
+1 932586,565877418 1014670,56483533 1070900,44301039  1100656,5650149
+2 2075462,54896424 2262606,57966598 2454839,30043114 2559887,84486059</code></pre>
+</div>
+</div>
+<ul>
+<li>O segundo argumento serve para indicar quantas linhas serão apresentadas</li>
+<li>Tail(), por outro lado, apresenta os últimos valores de uma base de dados</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href=""></a><span class="fu">tail</span>(baserm,<span class="dv">4</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sigla cod.ibge         estado anoeleitoral1990 anoeleitoral1991
+24    SC       42 Santa Catarina                1                0
+25    SE       28        Sergipe                1                0
+26    SP       35   S\xe3o Paulo                1                0
+27    TO       17      Tocantins                1                0
+   anoeleitoral1992 anoeleitoral1993 anoeleitoral1994 anoeleitoral1995
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral1996 anoeleitoral1997 anoeleitoral1998 anoeleitoral1999
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral2000 anoeleitoral2001 anoeleitoral2002 anoeleitoral2003
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral2004 anoeleitoral2005 anoeleitoral2006 anoeleitoral2007
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral2008 anoeleitoral2009 anoeleitoral2010 anoeleitoral2011
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral2012 anoeleitoral2013 anoeleitoral2014 anoeleitoral2015
+24                0                0                1                0
+25                0                0                1                0
+26                0                0                1                0
+27                0                0                1                0
+   anoeleitoral2016 anoeleitoral2017 vitoria1990.1 vitoria1994.1 vitoria1998.1
+24                0                0         50.42         45.86         58.92
+25                0                0         73.74         47.61         40.17
+26                0                0         43.50         46.84         32.21
+27                0                0         49.12         58.73         61.65
+   vitoria2002.1 vitoria2006.1 vitoria2010.1 vitoria2014.1 vitoria2017.1
+24         39.86         48.90         52.71         51.36            NA
+25         43.63         52.46         52.08         53.52            NA
+26         38.28         57.93         50.63         57.31            NA
+27         60.60         51.49         50.52         51.30            NA
+   derrota1990.1 derrota1994.1 derrota1998.1 derrota2002.1 derrota2006.1
+24         30.07         34.00         23.12         30.07         32.77
+25         25.07         47.40         38.70         28.43         45.02
+26         28.17         22.23         22.95         32.45         31.68
+27         37.33         36.57         33.17         33.74         46.84
+   derrota2010.1 derrota2014.1 derrota2017.1 marge1990 marge1994 marge1998
+24         24.91         29.90            NA     20.35     11.86     35.80
+25         45.19         41.37            NA     48.67      0.21      1.47
+26         35.23         21.53            NA     15.33     24.61      9.26
+27         49.48         44.72            NA     11.79     22.16     28.48
+   marge2002 marge2006 marge2010 marge2014 marge2017 vitoria1990.2
+24      9.79     16.13     27.80     21.46        NA            NA
+25     15.20      7.44      6.89     12.15        NA            NA
+26      5.83     26.25     15.40     35.78        NA         51.77
+27     26.86      4.65      1.04      6.58        NA         55.94
+   vitoria1994.2 vitoria1998.2 vitoria2002.2 vitoria2006.2 vitoria2010.2
+24         50.80            NA         50.34         52.71            NA
+25         51.68         54.39         55.00            NA            NA
+26         56.12         55.37         58.64            NA            NA
+27            NA            NA            NA            NA            NA
+   vitoria2014.2 vitoria2017.2 derrota1990.2 derrota1994.2 derrota1998.2
+24            NA            NA            NA         49.20            NA
+25            NA            NA            NA         48.32         45.61
+26            NA            NA         48.23         43.88         44.63
+27            NA            NA         44.06            NA            NA
+   derrota2002.2 derrota2006.2 derrota2010.2 derrota2014.2 derrota2017.2
+24         49.66         47.29            NA            NA            NA
+25         45.00            NA            NA            NA            NA
+26         41.36            NA            NA            NA            NA
+27            NA            NA            NA            NA            NA
+   segunt.1990 segunt.1994 segunt.1998 segunt.2002 segunt.2006 segunt.2010
+24           0           1           0           1           1           0
+25           0           1           1           1           0           0
+26           1           1           1           1           0           0
+27           1           0           0           0           0           0
+   segunt.2014 segunt.2017                       colig.venc1990
+24           0           0              PFL/PDS /PDC/PTB/PL/PSC
+25           0           0 PFL/PMDB/PDS/PSDB/PRN/PL/PDC/PCN/PST
+26           0           0                      PMDB/PFL/PL/PSD
+27           0           0              PMDB/PDT/PSDB/PRN/PCdoB
+                                   colig.venc1994
+24  PMDB/PTRB/PMN/PSD/PV/PRP/PCdoB/PDT/PPS/PT/PSB
+25 PSDB/PFL/PMDB/PPR/PTB/PPS/PL/PSD/PSC/PRP/PTdoB
+26                                       PSDB/PFL
+27                          PPR/PFL/PP/PTB/PV/PMN
+                                                       colig.venc1998
+24            PPB/PFL/PSDB/PTB/PL/PRN/PTdoB/PGT/PRTB/PSDC/PSL/PST/PAN
+25                                    PSDB/PMDB/PPB/PL/PSC/PPS/PV/PMN
+26                                                       PSDB/PTB/PSD
+27 PFL/PPB/PSDB/PTB/PSC/PL/PDT/PSB/PV/PRP/PST/PTN/PSDC/PGT/PRTB/PTdoB
+                                      colig.venc2002
+24                                         PMDB/PSDB
+25                 PFL/PPB/PPS/PDT/PSD/PST/PHS/PTdoB
+26                                      PSDB/PFL/PSD
+27 PFL/PPB/PSDB/PSD/PSL/PST/PAN/PRTB/PRP/PRONA/PTdoB
+                         colig.venc2006
+24 PMDB/PAN/PFL/PHS/PPS/PRTB/PSDB/PTdoB
+25             PT/PSB/PMDB/PL/PTB/PCdoB
+26                     PSDB/PFL/PTB/PPS
+27                         PMDB/PPS/PFL
+                                      colig.venc2010
+24             DEM/PMDB/PSDB/PPS/PTB/PSC/PSL/PTC/PRP
+25          PT/PMDB/PDT/PSB/PRB/PSL/PSC/PR/PTC/PCdoB
+26                     PSDB/DEM/PMDB/PSC/PPS/PHS/PMN
+27 PSDB/DEM/PTB/PR/PSC/PV/PTN/PRB/PRTB/PMN/PTC/PTdoB
+                                               colig.venc2014 colig.venc2017
+24         PSD/PMDB/DEM/PRB/PR/PSC/PSDC/PROS/PV/PDT/PCdoB/PTB           &lt;NA&gt;
+25           PMDB/PSB/PT/PRB/PSD/PCdoB/PDT/PROS/PRTB/PSDC/PRP           &lt;NA&gt;
+26 PSDB/PSB/DEM/PRB/SD/PSC/PPS/PTC/PTN/PSL/PMN/PEN/PSDC/PTdoB           &lt;NA&gt;
+27                                             PMDB/PV/PT/PSD           &lt;NA&gt;
+   cent.venc1990 cent.venc1994 cent.venc1998 cent.venc2002 cent.venc2006
+24           PFL          PMDB           PPB          PMDB          PMDB
+25           PFL          PSDB          PSDB           PFL            PT
+26          PMDB          PSDB          PSDB          PSDB          PSDB
+27          PMDB           PPR           PFL           PFL          PMDB
+   cent.venc2010 cent.venc2014 cent.venc2017              colig.derr1990
+24           DEM           PSD          &lt;NA&gt;                        &lt;NA&gt;
+25            PT          PMDB          &lt;NA&gt; PT/PSB/PCB/PCdoB/PDT/PMN/PV
+26          PSDB          PSDB          &lt;NA&gt;             PDS/PTB/PDC/PRN
+27          PSDB          PMDB          &lt;NA&gt;  PDC/PFL/PL/PSC/PST/PTR/PMN
+                           colig.derr1994                    colig.derr1998
+24             PPR/PP/PTB/PSC/PL/PFL/PSDB                              &lt;NA&gt;
+25                PDT/PMN/PP/PT/PSB/PCdoB PFL/PTB/PSD/PRN/PRP/PTN/PAN/PTdoB
+26                             PDT/PV/PRP            PPB/PFL/PL/PRN/PSL/PST
+27 PMDB/PSDB/PDT/PL/PSC/PSD/PRN/PSB/PCdoB                PMDB/PCdoB/PPS/PSD
+                       colig.derr2002                           colig.derr2006
+24 PPB/PFL/PSL/PST/PDT/PTB/PRTB/PTdoB                          PP/PMN/PRONA/PV
+25                PT/PL/PCdoB/PCB/PMN PFL/PSDB/PP/PPS/PSC/PV/PTN/PAN/PHS/PTdoB
+26                   PT/PCdoB/PCB/PMN                     PT/PCdoB/PL/PRB/PRTB
+27                               &lt;NA&gt;          PSDB/PP/PTB/PSC/PL/PSB/PV/PTdoB
+                                  colig.derr2010
+24                                  PP/PDT/PTdoB
+25                                          &lt;NA&gt;
+26   PT/PDT/PCdoB/PR/PSDC/PTN/PRB/PRP/PRTB/PTdoB
+27 PMDB/PP/PT/PDT/PPS/PSB/PSL/PSDC/PHS/PRP/PCdoB
+                                                       colig.derr2014
+24                  PSDB/PP/PSB/PSL/PTN/PPS/PRTB/PHS/PTC/PEN/PTdoB/SD
+25         PSC/PSDB/DEM/PTB/PPS/PR/SD/PTC/PEN/PV/PHS/PMN/PSL/PP/PTdoB
+26                                               PMDB/PDT/PSD/PP/PROS
+27 SD/PDT/PSDB/PP/PTB/DEM/PPS/PSB/PRB/PSL/PSC/PR/PRTB/PHS/PTC/PRP/PEN
+   colig.derr2017 cent.derr1990 cent.derr1994 cent.derr1998 cent.derr2002
+24           &lt;NA&gt;          PMDB           PPR          PMDB           PPB
+25           &lt;NA&gt;            PT           PDT           PFL            PT
+26           &lt;NA&gt;           PDS           PDT           PPB            PT
+27           &lt;NA&gt;           PDC          PMDB          PMDB          PMDB
+   cent.derr2006 cent.derr2010 cent.derr2014 cent.derr2017       pib1990
+24            PP            PP          PSDB          &lt;NA&gt; 17,2942659152
+25           PFL          PRTB           PSC          &lt;NA&gt;   8,492623942
+26            PT            PT          PMDB          &lt;NA&gt; 22,9467064865
+27          PSDB          PMDB            SD          &lt;NA&gt;  7,4802792384
+         pib1991       pib1992       pib1993       pib1994       pib1995
+24 17,4862919047 17,7565110336 18,4320880928 18,7359294484 19,5010579924
+25  8,4435004265  8,2226447498  8,4335197127  8,4825655399  8,4215892959
+26 22,4485135313 21,5229856589 22,4841773891 23,4447255754 24,1643222911
+27  7,6122181897  7,6062331607  7,5925648284  7,6169350505  7,7713175348
+         pib1996       pib1997       pib1998       pib1999       pib2000
+24 19,8858255241 20,4634529228 20,1427853348 20,0822904535 20,5757218084
+25   8,561773119  9,0157557207  8,8628500033  8,6218728818  8,7672435729
+26 24,1031639625 24,5496938133 23,8962432492 23,1100251143 23,7092725642
+27  7,7757470707  7,9080208851  8,0789021631  8,0857119891  8,1320619577
+         pib2001       pib2002       pib2003       pib2004       pib2005
+24 20,8844623857 20,9616339366 20,8384159784 22,0522553398 22,0431784035
+25  8,6820460686  8,8717633988  8,9504386847  9,3804812523   9,746751866
+26 23,4228446292 23,3234417859 22,8757550908 23,8912154431 24,3598569518
+27  8,0138560417  8,0758971422  8,7326442958  9,3678485905  9,7264417171
+         pib2006       pib2007       pib2008       pib2009       pib2010
+24 22,2606141093   23,96452476 23,9180809893 23,6424543172 24,3984200027
+25  9,9776921472 10,9347879797 10,8817029713 11,2505972278 11,5724400015
+26 24,9467930565 27,6206370268 28,4034940399 27,9288107975 30,2431700034
+27   9,829354866 11,0237822544 11,3575263384 11,6840034913  12,461670002
+         pib2011 presidente_ass1990 presidente_ass1994 presidente_ass1998
+24 25,0174683914                PDS                PDS               PSDB
+25 11,7197545373                PFL               &lt;NA&gt;                PFL
+26 30,3351441728               PMDB               PSDB               PSDB
+27 12,0513847615               &lt;NA&gt;               &lt;NA&gt;               &lt;NA&gt;
+   presidente_ass2002 presidente_ass2006 presidente_ass2010 presidente_ass2014
+24                 PT               &lt;NA&gt;                PSD               PMDB
+25                PFL               PSDB                PSC               PMDB
+26               PSDB               PSDB                PSB               PSDB
+27               &lt;NA&gt;               &lt;NA&gt;               &lt;NA&gt;               &lt;NA&gt;
+   alinhamento1990 alinhamento1994 alinhamento1998 alinhamento2002
+24               0               0               0               0
+25               1              NA               0               1
+26               1               1               1               1
+27              NA              NA              NA              NA
+   alinhamento2006 alinhamento2010 alinhamento2014  nep1994       tampub1990
+24              NA               0               0 1.852039 3864440,51885973
+25               0               0               1 1.540130 971919,356653973
+26               1               0               1 1.108644 32030505,5565219
+27              NA              NA              NA 3.267424 336618,073532113
+         tampub1991       tampub1992       tampub1993       tampub1994
+24 3044398,00952559 2878119,75130662 3233298,35490963 3883578,63480444
+25 1033326,59668615 960209,465362672 1023101,23672086 1093757,75386495
+26 29318383,7079537 26083676,9601677 29504411,1559908 30518738,9985881
+27  395704,33220278 299986,954758008 458680,363556348 545919,364528239
+         tampub1995       tampub1996       tampub1997       tampub1998
+24 4239392,34190224  4329228,8310874 3933863,15598997 4118723,21824177
+25 1359761,69411054 1369064,65139731  1287005,6603136 1371625,49255682
+26 32451245,0300568 36454840,1901522 38684167,2518864 41904103,8133446
+27 576491,552242776  695778,42898056 706966,447184362 793937,877438079
+         tampub1999       tampub2000       tampub2001       tampub2002
+24 4001104,51547176 4351501,64784291 4069839,68215204 4487510,19538674
+25 1332917,63824243 1399417,02637658 1347882,17013854 1593092,32922432
+26 40720661,2869789 34337301,0888346 32533001,4269696  31570213,574016
+27 771778,031620068 618568,172025916 591323,579673879 942548,599020474
+         tampub2003       tampub2004       tampub2005       tampub2006
+24 4583523,25202327 4580035,05220288 4997253,66029641 5253204,99279084
+25 1541196,53447207 1550972,17264608 1694634,93724624 1960397,99369845
+26 31326075,7776173  30883214,726262 32673443,6775475 34138254,7949099
+27 980592,141717068 1038045,61036685 1109369,15573646 1265587,84651625
+         tampub2007       tampub2008       tampub2009
+24  5672797,5807212 6149095,66638515 6262294,59770163
+25 2082847,29585588 2232124,70578603 2266779,22969508
+26 37750820,6501719  39947491,184932 42897556,2016075
+27 1387668,85772441  1464607,2921382 1575495,46613015</code></pre>
+</div>
+</div>
+<div class="quarto-auto-generated-content">
+<p><img src="imgs/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>CURSO DE R</p>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copiada");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copiada");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
