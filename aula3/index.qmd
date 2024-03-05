@@ -1,9 +1,11 @@
 ---
-title: "Aula 3 - Estruturas de dados e manipulação avançada"
+title: "Aula 3 - Preparação de Dados"
 author: "Frederico Bertholini"
 subtitle: "Escola de Métodos em Ciência Política"
 format: 
     revealjs:
+      self-contained: true
+      touch: true
       lang: pt-BR
       toc: true
       toc-depth: 1
@@ -18,259 +20,7 @@ knitr::opts_chunk$set(echo = T,eval=T)
 ```
 
 
-# data.frame
-
-## data.frame
- 
-  - Um data.frame é o mesmo que uma tabela do SQL ou uma planilha Excel
-  - seus dados provavelmente serão importados para um objeto data.frame 
-
-  - data.frame’s são listas especiais em que todos os elementos possuem o mesmo comprimento.
-
-  - Cada elemento dessa lista pode ser pensado como uma coluna da tabela - ou como uma variável. Uso do '$'
-
-  - Seu comprimento representa o número de linhas - ou seja, de observações
-
-## data.frame
-
-  - Como data.frames's são listas, suas colunas podem ser de classes diferentes. Essa é a grande diferença entre data.frame’s e matrizes.
-
-Funções úteis:
-```{r,eval=F} 
-head() # Mostra as primeiras 6 linhas.
-tail() # Mostra as últimas 6 linhas.
-dim() # Número de linhas e de colunas.
-names() # Os nomes das colunas (variáveis).
-str() # Estrutura do data.frame. Mostra, entre outras coisas, as >classes de cada coluna.
-cbind() # Acopla duas tabelas lado a lado.
-rbind() # Empilha duas tabelas.
-```  
-
-# Pacotes
-## O que são pacotes
- 
-  - O R possui diversas funções já instaladas dentro da sua programação
-  - Exemplos são sum(), length(), class(), c()
-  - Outras, porém, devem ser instaladas para que possam ser utilizadas pelos usuários
-  - A maneira com a qual instalamos novas funções, não definidas anteriormente no software, é através de pacotes
-  - Pacotes concentram diversas funções para diversas demandas  
- Importação de dados;  
- Organização de banco de dados;  
- Análises estatísticas específicas;  
- Gráficos diferenciados;  
- 
- 
-
-## O que são pacotes
- 
-  - A instalação de qualquer pacote pode ser feita por dentro do R
-  - Para isso, porém, é preciso primeiro conexão com a internet, já que o R busca o novo pacote no repositório de pacotes
-  - A função para instalar pacote, portanto, é install.packages()
-  - O nome da nova função deve vir, primeiramente entre parenteses
-  - Podemos começar instalando o pacote para importação de bases de dados: foreign
-```{r,eval=F} 
-install.packages("foreign")
-```  
-  - Após alguns segundos, e algumas mensagens no console, a instalação será efetivada
- 
- 
-
-## Ativar pacotes
- 
-  - Cada pacote, inclusive o foreign, tem uma documentação disponível na internet
-  - Nessa documentação estão disponíveis as funções que o pacote possui, além do nome do seu criador
-  - As função não ficam disponíveis assim que o pacote termina a instalação
-  - Para ativar as funções do pacote, é preciso utilizar a função library()
-```{r} 
-library(foreign)
-```  
-  - Repare, que uma vez instalado, o nome do pacote não precisa mais estar entre aspas
- 
- 
-## Ativar pacotes
- 
-  - Portanto, para começarmos o procedimento de instalação do pacote, seguimos os passos a seguir:  
- Caso não esteja instalado, instalar o pacote através da função install.packages();  
- Para ativar o pacote, utilizar a função library() sem as aspas no nome do pacote instalado  
-```{r,eval=F} 
-install.packages("foreign")
-
-library(foreign)
-```  
-  - Uma vez instalado o pacote, não é preciso instalar mais a não ser que você reinstale o R
- 
- 
-
-# Importação de dados
-## Passo a passo
- 
-  - A importação é uma das tarefas que demandam mais atenção no R
-  - É preciso ter um conhecimento prévio de como sua base externa está constituída
-  - Outra informação importante é a extensão do arquivo da base
-  - Primeiramente, a informação que deve ser dada ao software é onde está a base - diretório de trabalho
-  - A função necessária é setwd() que define o diretório da sua seção no R
-  - Dentro da função, iremos inserir o local do arquivo  
- Em caso de Windows, inverta as barras ou duplique;  
- Não se esqueça das aspas;  
- 
-```{r,eval=F} 
-
-setwd("/Volumes/Macintosh HD/MQCP_IPOL_2020/Slides/aula 03") # mmudando meu direto
-
-```  
- 
- 
-
-## Passo a passo
- 
-  - Esse diretório definido significa que as bases e os gráficos produzidos serão enviados para essa pasta
-  - Finalmente, vamos importar as bases de dados
-  - Primeiro, vamos importar a base de extensão txt com o nome baserm
-  - Não é preciso de pacote para esse procedimento
-```{r} 
-lines <- readLines("dados/baserm.txt")
-
-baserm <- read.table(text = lines, sep = '\t')
-```  
-  - Repare que definimos a base dentro das aspas e com a extensão
-  - Na segunda linha, o primeiro argumento é o texto, o segundo argumento trata de como os dados estão separados, geralmente txt vem separado assim
- 
-
-
-## Passo a passo
- 
-  - No pacote foreign, a forma mais genérica de importação da base é o read.table()
-  - Entretanto, o pacote apresenta uma série de especialidades, a depender da extensão em questão
-  - Para CSV, vimos que tem a read.csv(). Já para dta, base de origem do stata, temos a função read.dta()
-  - O pacote foreign não possui a extensão xlsx e xls, extensão muito encontrada e comum entre as bases de dados disponíveis
-  - Para isso, vamos instalar um novo pacote readxl
-```{r,eval=F} 
-install.packages("readxl")
-```  
-  - Esse pacote disponibiliza as funções read_xls() e read_xlsx()
- 
- 
-
-## Passo a passo
- 
-  - Vamos ativar as funções disponíveis no pacote readxl com a função library()
-```{r} 
-library(readxl)
-```  
-  - Vamos importar a base controle_cgu_municípios.xlsx
-```{r} 
-cgu <- 
-read_xlsx("dados/controle_cgu_municípios.xlsx")
-```  
-  - Repare que acessamos apenas a primeira página da base
-  - Para acessarmos a segunda páginas, utilizamos o argumento sheet=2
-```{r,eval=F} 
-cgu <- 
-read_xlsx("dados/controle_cgu_municípios.xlsx", 
-sheet = 2)
-```  
-  - Alguns sinais de alerta surgem, porém não se trata de erro
- 
-
-
-## Importação por pacote 
- 
-  - Por fim, podemos importar dados através de pacotes
-  - Após ativar o pacote "ElectionsBR", a função legend_fed() fica disponível para a importação
-  - Como toda a função, ou quase todas, possui argumentos importantes:
-      - 'year =' se refere ao ano de extração
-      - 'uf =' se refere à UF
-
-## Importação
- 
- - Vamos começar importando dados de coalizões pré-eleitorais (coligações) do DF em 2018, nos retornando um objeto em 'tbl_df' e data frame
-      
-```{r} 
-library(electionsBR)
-leg_df_2018 <- legend_fed(year = 2018,uf="DF")
-
-```  
-      - Provavelmente, demorará alguns segundos, até minutos, para a importação
-      - Além disso, essa técnica demanda acesso à internet
- 
-
-## Visualizando a base
- 
-  - Primeira coisa importante de se informar é a classe desses objetos
-  - Temos 4 objetos: baserm, cgu, educacao e pnad2018
-```{r} 
-class(baserm)
-
-class(cgu)
-
-class(leg_df_2018)
-```  
-  
-
-## Visualizando a base
- 
-  - Uma visão completa da base é o comando View()
-  - Entretanto, cuidado, dependendo do tamanho da base, podemos travar o software
-```{r, eval=F} 
-View(baserm)
-```  
-  - Repare no V maiúsculo, lembre-se que o R é bastante sensível na sua linguagem
-  - O View() abre uma nova aba com a base no formato de grade
-  - Podemos, assim, visualizar a base de dados na forma mais intuitiva
- 
- 
-
-## Visualizando a base
- 
-  - Porém, para bases como a pnad2018, por exemplo, sabemos que é grande demais para sua visualização ser feita através do View()
-  - Algumas funções podem nos ajudar nessa tarefa
-  - A primeira é o dim, que as dimensões da base
-```{r} 
-dim(leg_df_2018)
-```  
-  - O primeiro valor sempre retrata o número de linhas, ou observações, enquanto o segundo valor apresenta o número de colunas, ou variáveis
-  - A função ncol() e length() também indicam quantas colunas, ou variáveis estão presentes na base
- 
- 
-
-## Visualizando a base
- 
-  - Outra função importante na visualização de bases de dados é a lista de nomes
-  - A função names() descreve as variáveis presentes na base
-  - Isso facilita no momento de selecionar as variáveis que entrarão na análise de vocês
-```{r} 
-names(cgu)
-                  
-```  
- 
- 
-
-## Visualizando a base
- 
-  - Outra função possível é o str()
-  - Essa função apresenta o nome das variáveis, a classe de cada uma delas e os primeiros valores
-```{r} 
-str(leg_df_2018)
-```  
- 
- 
-
-## Visualizando a base
- 
-  - Finalmente, a função head() e tail()
-  - A primeira função apresenta os primeiros valores de uma base de dados
-```{r} 
-head(baserm,2)
-```  
-  - O segundo argumento serve para indicar quantas linhas serão apresentadas
-  - Tail(), por outro lado, apresenta os últimos valores de uma base de dados
-```{r} 
-tail(baserm,4)
-```  
- 
-
-
-# O Universo tidyverse
+# tidyverse
 
 
 ## Manifesto tidyverse
@@ -308,6 +58,9 @@ O operador %>% (pipe) foi uma das grandes revoluções recentes do R, tornando a
 library(tidyverse)
 library(magrittr)
 ```
+
+## Ceci n'est pas un pipe
+
 
 
 ## Ideia
@@ -469,28 +222,28 @@ glimpse(decisoes)
 
 - `arrange`: ordenar linhas
 
-# select
+## select
 
 ## `select`
 
 - Utilizar `starts_with(x)`, `contains(x)`, `matches(x)`, `one_of(x)`, etc.
 - Possível colocar nomes, índices, e intervalos de variáveis com `:`.
 
-## Em ação
+## `select` em ação 1
 
 ```{r}
 decisoes %>% 
   select(id_decisao, n_processo, municipio, juiz)
 ```
 
-## Em ação
+## `select` em ação 2
 
 ```{r}
 decisoes %>% 
   select(classe_assunto:id_decisao, juiz)
 ```
 
-## Em ação
+## `select` em ação 3
 
 ```{r}
 decisoes %>% 
@@ -498,7 +251,7 @@ decisoes %>%
 ```
 
 
-## Operações
+## Operações com `select` 1
 
 - selecione as colunas que acabam com "cisao".
 
@@ -507,7 +260,7 @@ decisoes %>%
   select(ends_with("cisao"))
 ```
 
-## Operações 
+## Operações com `select` 2
 - tire as colunas de texto = 'txt_decisao' e classe/assunto = 'classe_assunto'.
     - Dica: veja os exemplos de `?select` em `Drop variables ...`
 
@@ -516,7 +269,7 @@ decisoes %>%
   select(-classe_assunto, -txt_decisao)
 ```
 
-# filter
+## filter
 
 ## `filter`
 
@@ -601,7 +354,7 @@ decisoes %>%
   mutate(tempo = dmy(data_registro) - dmy(data_decisao))
 ```
 
-## 
+## `mutate` em ação
 
 - Crie uma coluna binária `drogas` que vale `TRUE` se no texto da decisão algo é falado de drogas e `FALSE` caso contrário. 
  -- Dica: `str_detect`
@@ -628,7 +381,7 @@ decisoes %>%
 - Geralmente é utilizado em conjunto com `group_by()`.
 - Algumas funções importantes: `n()`, `n_distinct()`.
 
-## Em ação
+## `summarise` Em ação
 
 ```{r,eval=F}
 decisoes %>% 
@@ -708,7 +461,7 @@ decisoes %>%
  -- Dica: use `str_length()`
  -- Lembre-se da função `head()`
 
-## 
+## `arrange` em ação
 
 ```{r}
 decisoes %>% 
@@ -741,7 +494,7 @@ processos <- read_rds("dados/processos_nested.rds")
 
 ## Fomato tidy
 
-- Hadley Wickham <http://r4ds.had.co.nz/tidy-data.html>
+- Hadley Wickham <https://r4ds.hadley.nz/data-tidy#sec-tidy-data>
 
 
 ## Funções do pacote
@@ -759,11 +512,9 @@ processos <- read_rds("dados/processos_nested.rds")
 ## Onde estamos
 
 
-<http://r4ds.had.co.nz/wrangle-intro.html>
+<https://r4ds.hadley.nz/data-transform>
 
-```{r, out.width="90%", echo=FALSE, fig.align='center',eval=F}
-knitr::include_graphics("imgs/wrangle.png")
-```
+![](imgs/wrangle.png)
 
 
 ## `gather()` 
@@ -795,7 +546,7 @@ Base `relig_income` do `tidyr` 3 variáveis:
 tidyr::relig_income
 ```
 
-##
+## `pivot_longer` em ação
 
 ```{r}
 tidyr::relig_income %>%
@@ -1129,14 +880,14 @@ decisoes %>%
 ```
 
 
-##
+## `janitor::get_dupes()` em ação
 
 ```{r echo=F}
 decisoes %>% 
   get_dupes(n_processo)
 ```
 
-## 
+## Exemplos `janitor`
 
 - Janitor exemplos <http://sfirke.github.io/janitor/articles/janitor.html>
 
