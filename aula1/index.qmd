@@ -5,6 +5,7 @@ subtitle: "Escola de Métodos em Ciência Política"
 format: 
     revealjs:
       self-contained: true
+      touch: true
       lang: pt-BR
       toc: true
       toc-depth: 1
@@ -450,7 +451,7 @@ nomes.com.p
 
 ## Seleção de elementos
  
-  - Algumas operações se restrigem à determinados elementos ou à um conjunto deles incluso dentro de um vetor
+  - Algumas operações se restrigem a determinados elementos ou a um conjunto deles incluso dentro de um vetor
   - Para realizar tais procedimentos precisamos saber escolher elementos
   - Para isso, utilizaremos o operador '[]' depois de apontar o vetor
   - Mais especificamente: 
@@ -636,6 +637,12 @@ n.naturais[!is.element(n.naturais,n.pares)]
 
   - Seu comprimento representa o número de linhas - ou seja, de observações
 
+
+## Estrutura de dados - data.frame
+
+![](imgs/dados.png)
+
+
 ## data.frame de perto
 
   - Como data.frames's são listas, suas colunas podem ser de classes diferentes. Essa é a grande diferença entre data.frame’s e matrizes.
@@ -651,244 +658,4 @@ cbind() # Acopla duas tabelas lado a lado.
 rbind() # Empilha duas tabelas.
 ```  
 
-## Estrutura de dados
-
-![](imgs/dados.png)
-
-# Pacotes
-
-## O que são pacotes
- 
-  - O R possui diversas funções já instaladas dentro da sua programação
-  - Exemplos são sum(), length(), class(), c()
-  - Outras, porém, devem ser instaladas para que possam ser utilizadas pelos usuários
-  - A maneira com a qual instalamos novas funções, não definidas anteriormente no software, é através de pacotes
-  
-## O que fazem os pacotes
-
-  - Pacotes concentram diversas funções para diversas demandas  
- Importação de dados;  
- Organização de banco de dados;  
- Análises estatísticas específicas;  
- Gráficos diferenciados;  
- 
- 
-## Mais pacotes
- 
-  - A instalação de qualquer pacote pode ser feita por dentro do R
-  - É preciso conexão com a internet, já que o R busca o novo pacote no repositório de pacotes
-  - A função para instalar pacotes é `install.packages()`
-  - O nome do pacote deve vir entre aspas dentro dos parênteses
-  
-## Instalando pacote
-
-  - Podemos começar instalando o pacote para importação de bases de dados: foreign
-```{r,eval=F} 
-install.packages("foreign")
-```  
-  - Após alguns segundos, e algumas mensagens no console, a instalação será efetivada
-  - Cada pacote, inclusive o foreign, tem uma documentação disponível na internet
-  - Nessa documentação estão disponíveis as funções que o pacote possui, além do nome do seu criador
- 
-## Ativando pacotes
- 
-  - As função não ficam disponíveis assim que o pacote termina a instalação
-  - Para ativar as funções do pacote, é preciso utilizar a função library()
-```{r} 
-library(foreign)
-```  
-  - Repare, que uma vez instalado, o nome do pacote não precisa mais estar entre aspas
- 
- 
-## Ativar pacotes
- 
-  - Para começarmos o procedimento de instalação do pacote, seguimos os passos a seguir:  
-    -- Caso não esteja instalado, instalar o pacote através da função install.packages();  
-    --    Para ativar o pacote, utilizar a função library() sem as aspas no nome do pacote instalado  
-```{r,eval=F} 
-install.packages("foreign")
-
-library(foreign)
-```  
-  - Uma vez instalado o pacote, não é preciso instalar mais, a não ser que você reinstale o R
- 
-
-# Importação de dados
-
-## importação: uma das tarefas que demandam mais atenção
- 
-  - É preciso ter um conhecimento prévio de como sua base externa está constituída
-  - Outra informação importante é a **extensão do arquivo** da base (`.txt, .xlsx, .csv `)
-  
-::: {.callout-caution collapse="true"}
-
-Primeiro, você deve importar seus dados para o R. Isso geralmente significa que você pega dados armazenados em um arquivo, um banco de dados ou uma API da web e importa em uma tabela (data frame) no R. Se você não conseguir importar seus dados para o R, não poderá fazer ciência de dados com eles!
-
-:::
-  
-## Diretório de trabalho
-
-  - Primeiramente, a informação que deve ser dada ao software é onde está a base - diretório de trabalho
-  - A função necessária é setwd() que define o diretório da sua seção no R
-  - Dentro da função, iremos inserir o local do arquivo  
- Em caso de Windows, inverta as barras ou duplique;  
- Não se esqueça das aspas;  
-```{r,eval=F} 
-setwd("/Volumes//Volumes/MacSSD480/git_proj/emcp2024/aula1")
-```  
- 
- 
-## sem pacotes
- 
-  - Esse diretório definido significa que as bases e os gráficos produzidos serão enviados para essa pasta
-  - Finalmente, vamos importar as bases de dados
-  - Primeiro, vamos importar a base de extensão txt com o nome baserm
-  - Não é preciso de pacote para esse procedimento
-  
-## importando txt
-
-```{r} 
-lines <- readLines("dados/baserm.txt")
-
-baserm <- read.table(text = lines, sep = '\t')
-```  
-  - Repare que definimos a base dentro das aspas e com a extensão
-  - Na segunda linha, o primeiro argumento é o texto, o segundo argumento trata de como os dados estão separados, geralmente txt vem separado assim
- 
-
-## foreign
- 
-  - No pacote foreign, a forma mais genérica de importação da base é o read.table()
-  - Entretanto, o pacote apresenta uma série de especialidades, a depender da extensão em questão
-  - Para CSV, vimos que tem a read.csv(). Já para dta, base de origem do stata, temos a função read.dta()
-
-## readxl
-
-  - O pacote foreign não possui a extensão xlsx e xls, extensão muito encontrada e comum entre as bases de dados disponíveis
-  - Para isso, vamos instalar um novo pacote readxl
-```{r,eval=F} 
-install.packages("readxl")
-```  
-  - Esse pacote disponibiliza as funções read_xls() e read_xlsx()
- 
- 
-## Ativando funções do readxl
- 
-  - Vamos ativar as funções disponíveis no pacote readxl com a função library()
-```{r} 
-library(readxl)
-```  
-  - Vamos importar a base controle_cgu_municípios.xlsx
-```{r} 
-cgu <- 
-read_xlsx("dados/controle_cgu_municípios.xlsx")
-```  
-
-## Importando com readxl
-  - Repare que acessamos apenas a primeira página da base
-  - Para acessarmos a segunda páginas, utilizamos o argumento sheet=2
-```{r,eval=F} 
-cgu <- 
-read_xlsx("dados/controle_cgu_municípios.xlsx", 
-sheet = 2)
-```  
-  - Alguns sinais de alerta surgem, porém não se trata de erro
- 
-
-
-## Importação por pacote 
- 
-  - Por fim, podemos importar dados através de pacotes
-  - Após ativar o pacote "ElectionsBR", a função legend_fed() fica disponível para a importação
-  - Como toda a função, ou quase todas, possui argumentos importantes:
-      - 'year =' se refere ao ano de extração
-      - 'uf =' se refere à UF
-
-## Importação
- 
- - Vamos começar importando dados de coalizões pré-eleitorais (coligações) do DF em 2018, nos retornando um objeto em 'tbl_df' e data frame
-      
-```{r} 
-library(electionsBR)
-leg_df_2018 <- legend_fed(year = 2018,uf="DF")
-
-```  
-      - Provavelmente, demorará alguns segundos, até minutos, para a importação
-      - Além disso, essa técnica demanda acesso à internet
- 
-
-## Visualizando a base
- 
-  - Primeira coisa importante de se informar é a classe desses objetos
-  - Temos 4 objetos: baserm, cgu, educacao e pnad2018
-```{r} 
-class(baserm)
-
-class(cgu)
-
-class(leg_df_2018)
-```  
-  
-
-## Visualizando a base
- 
-  - Uma visão completa da base é o comando View()
-  - Entretanto, cuidado, dependendo do tamanho da base, podemos travar o software
-```{r, eval=F} 
-View(baserm)
-```  
-  - Repare no V maiúsculo, lembre-se que o R é bastante sensível na sua linguagem
-  - O View() abre uma nova aba com a base no formato de grade
-  - Podemos, assim, visualizar a base de dados na forma mais intuitiva
- 
- 
-
-## Visualizando a base
- 
-  - Porém, para bases como a pnad2018, por exemplo, sabemos que é grande demais para sua visualização ser feita através do View()
-  - Algumas funções podem nos ajudar nessa tarefa
-  - A primeira é o dim, que as dimensões da base
-```{r} 
-dim(leg_df_2018)
-```  
-  - O primeiro valor sempre retrata o número de linhas, ou observações, enquanto o segundo valor apresenta o número de colunas, ou variáveis
-  - A função ncol() e length() também indicam quantas colunas, ou variáveis estão presentes na base
- 
- 
-
-## Visualizando a base
- 
-  - Outra função importante na visualização de bases de dados é a lista de nomes
-  - A função names() descreve as variáveis presentes na base
-  - Isso facilita no momento de selecionar as variáveis que entrarão na análise de vocês
-```{r} 
-names(cgu)
-                  
-```  
- 
- 
-
-## Visualizando a base
- 
-  - Outra função possível é o str()
-  - Essa função apresenta o nome das variáveis, a classe de cada uma delas e os primeiros valores
-```{r} 
-str(leg_df_2018)
-```  
- 
- 
-
-## Visualizando a base
- 
-  - Finalmente, a função head() e tail()
-  - A primeira função apresenta os primeiros valores de uma base de dados
-```{r} 
-head(baserm,2)
-```  
-  - O segundo argumento serve para indicar quantas linhas serão apresentadas
-  - Tail(), por outro lado, apresenta os últimos valores de uma base de dados
-```{r} 
-tail(baserm,4)
-```  
- 
 
