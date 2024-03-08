@@ -5,6 +5,7 @@ author: "Frederico Bertholini"
 lang: pt-BR
 format: 
   html:
+    self-contained: true
     theme: solar
     logo: logo.png
 ---
@@ -12,14 +13,15 @@ format:
 ### Aula 1  - Conhecendo o R
 04.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula1)
 
-### Aula 2 - Tidyverse
+### Aula 2 - Conhecendo seus Dados
 05.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula2)
 
-### Aula 3  - Estruturas de dados e manipulação
+### Aula 3  - Preparando seus Dados
 06.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula3)
 
-### Aula 4  - Gráficos (ggplot e extensões)
+### Aula 4  - Manipulando seus Dados
 07.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula4)
 
-### Aula 5  - Relatórios e apresentações
+### Aula 5  - Comunicando seus Dados (ggplot e relatórios)
 08.mar.2024 - [Slides](https://ipol-unb.github.io/emcp24/aula5)
+
