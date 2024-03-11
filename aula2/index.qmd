@@ -1,5 +1,5 @@
 ---
-title: "Aula 2 - O Tidyverse"
+title: "Aula 2 - Conhecendo seus Dados"
 author: "Frederico Bertholini"
 subtitle: "Escola de Métodos em Ciência Política"
 format: 
@@ -17,6 +17,300 @@ format:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T,eval=T)
 ```
+
+
+# Vetores
+
+## O que são vetores?
+ 
+  - Vetores são combinações de valores em uma estrutura unidimensional 
+  - Ou seja, podem ser combinações de números, valores lógicos, nomes e várias outras possibilidades
+  - Por exemplo, combinação de valores pares: 2,4,6,8
+  - Ou a combinações de nomes começando por P: Pedro, Paula, Pietro, Paloma
+  - Combinação de valores lógico: TRUE, FALSE, TRUE, TRUE
+ 
+ 
+## Criação de vetores
+ 
+  - Para criar vetores é importante combinar valores
+  - A função necessária para a criação de vetores é a função c(), c de *combine* ou *concatenate*
+```{r}
+c(2,4,6,8)
+
+c("Pedro","Paula","Pietro","Paloma")
+
+c(TRUE,FALSE,TRUE,FALSE)
+``` 
+  
+ 
+## Etiquetas para vetores
+ 
+  - Assim como fizemos com os valores, atribuímos também etiquetas aos vetores
+  - Dessa maneira, podemos trabalhar com as sequências ao longo do script, assim como dar razão ou justificativa aos valores combinados
+```{r}
+n.pares <- c(2,4,6,8)
+
+nomes.com.p <- 
+c("Pedro","Paula","Pietro","Paloma") 
+
+valores.log <- c(TRUE,FALSE,TRUE,FALSE)
+``` 
+  
+ 
+## Classes dos vetores
+ 
+  - Os vetores também possuem classes
+  - Essas categorias determinam as operações possíveis dentro de um vetor
+  - Para obter a informação sobre a classe de um vetor, utilizamos a função class()
+```{r}
+class(n.pares)
+
+class(nomes.com.p)
+
+class(valores.log)
+``` 
+  
+ 
+
+## Comprimento de vetores
+ 
+  - Os vetores podem ser medidos em relação ao seu comprimento
+  - O seu comprimento define a extensão do vetor, assim como quantos elementos estão presentes dentro da combinação de valores
+  - O comprimento pode ser medido pela função length()
+```{r}
+length(n.pares)
+
+length(nomes.com.p)
+
+length(valores.log)
+``` 
+ 
+ 
+ 
+
+## Somatório de vetores
+ 
+  - Para vetores númerico podemos somar os valores de um vetor
+  - A função se chama sum() que corresponde ao $\sum$
+```{r}
+sum(n.pares)
+
+``` 
+  - Em vetores com valores lógicos, com TRUE e FALSE, o sum soma o número de T que temos dentro de um vetor
+
+```{r}
+sum(valores.log)
+
+``` 
+
+ 
+## Somatório de vetores lógicos
+ 
+  - A função sum() pode se tornar ainda um contador de um teste
+  - Por exemplo, queremos saber quantos nomes são iguais ao de Pedro no vetor 'nomes.com.p'
+```{r}
+teste1 <- nomes.com.p == "Pedro"
+
+sum(teste1)
+
+teste1
+``` 
+ 
+
+## Seleção de elementos
+ 
+  - Queremos selecionar no vetor nomes.com.p o segundo elemento que é Paula
+  - Vejamos, primeiro, como se compõe o vetor de caracteres nomes.com.p e a lógica do posicionamento dentro do vetor
+```{r}
+nomes.com.p
+``` 
+
+ 
+
+## Usando `%in%` na Seleção de elementos
+ 
+  - Vamos testar se Paula se inclui dentro do vetor sem termos que ver no console
+  - As vezes, vetores são maiores do que temos como exemplo
+  - Para o teste lógico, utilizamos o operador %in%, que retorna TRUE, caso o valor esteja incluso no vetor
+```{r}
+"Paula" %in% nomes.com.p
+``` 
+ 
+
+
+## Regras de Seleção de elementos
+ 
+  - Algumas operações se restrigem a determinados elementos ou a um conjunto deles incluso dentro de um vetor
+  - Para realizar tais procedimentos precisamos saber escolher elementos
+  - Para isso, utilizaremos o operador '[]' depois de apontar o vetor
+  - Mais especificamente: 
+ Vetor; 
+ []; 
+ Posição ou regra; 
+ 
+ 
+
+## Alternativas de Seleção 1
+ 
+  - Para escolhar Paula, portanto, vamos definir como a segunda posição dentro do vetor
+```{r}
+nomes.com.p[2]
+``` 
+  - O posicionamento dos nomes ao longo do vetor determina como seleciona-lo individualmente
+  - Porém, podemos selecionar através do valor
+```{r}
+nomes.com.p[nomes.com.p == "Paula"]
+``` 
+ 
+ 
+##  Alternativas de Seleção 2
+ 
+  - Selecionamos também o último valor do vetor nomes.com.p
+  - Sabemos que o vetor possui 4 valores utilizando a função length()
+```{r}
+length(nomes.com.p)
+``` 
+
+##  Alternativas de Seleção 3
+  - Assim o último valor é igual a 4
+  - Para selecionarmos o último valor, ou definimos como a posição 4 ou apenas o length() do vetor
+```{r}
+nomes.com.p[4]
+
+nomes.com.p[length(nomes.com.p)]
+
+``` 
+ 
+ 
+## Seleção de elementos
+ 
+  - Para seleção de elementos através de regras, podemos utilizar o vetor númerico de n.pares
+```{r}
+n.pares  <- c(2,4,6,8)
+
+n.pares
+
+``` 
+  - O objetivo aqui é selecionar os elementos maiores que 5, que é a mediana do vetor
+```{r}
+median(n.pares)
+
+``` 
+ 
+ 
+
+## Seleção de elementos
+ 
+  - Selecionamos, assim, os elementos acima da mediana do vetor n.pares, que são os valores 6 e 8
+```{r}
+n.pares[n.pares > 5]
+``` 
+  - Ou ainda podemos definir o valor 5 como o valor da mediana
+  - O resultado é o mesmo, porém, deixa claro ao leitor do seu script que se trata dos valores acima da mediana do vetor n.pares
+```{r}
+n.pares[n.pares > median(n.pares)]
+``` 
+
+# Operações matemáticas
+
+## Operações com vetores
+  - Em vetores numéricos, podemos fazer operações matemáticas a partir do seu posicionamento
+  - Vamos calcular o alcance do vetor "n.pares"
+```{r}
+#ultimo elemento 
+n.pares[length(n.pares)]
+
+#primeiro elemento
+n.pares[1]
+
+``` 
+  - Subtraindo esses dois elementos, temos o alcance do vetor
+```{r}
+n.pares[length(n.pares)] - n.pares[1]
+
+``` 
+
+
+## Operações com vetores
+ 
+  - Ainda em vetores numéricos, vamos calcular vetores com regras
+  - Selecionamos elementos maiores que 5
+```{r}
+n.pares[n.pares >= 5]
+
+``` 
+  - Queremos duplicar os valores inclusos dentro da condição
+```{r}
+n.pares[n.pares >= 5] * 2
+
+``` 
+  - Por fim, operacionar um conjunto com um elemento
+```{r}
+n.pares[n.pares >= 5] * n.pares[1]
+
+``` 
+ 
+
+## Conjuntos
+ 
+  - Utilizamos a teoria de conjuntos no R com a função de manipular e identificar elementos comuns ou diferente entre vetores
+  - Já temos o vetor "n.pares" e vamos criar um vetor com números naturais
+```{r}
+n.naturais <- c(0,1,2,3,4,5,6,7,8,9)
+n.naturais
+
+``` 
+  - Se perguntarmos por valores que não estão no vetor "n.naturais", o resultado será conjunto vazio
+```{r}
+n.naturais[n.naturais == 10]
+``` 
+ 
+ 
+
+## Conjuntos
+ 
+  - Outro ponto importante é saber se os elementos estão contidos dentro de outro vetor
+  - A pergunta a se fazer é: os elementos do vetor "n.partidos" está contido no vetor "n.naturais"
+  - No R, contidos é igual a \%in\%
+```{r}
+n.pares %in% n.naturais
+
+``` 
+
+## Conjuntos
+
+  - Isto é, o vetor "n.pares" está contido no vetor "n.naturais" e é um subconjunto
+  - Outra maneira é utilizando a função is.element()
+```{r}
+is.element(n.pares,n.naturais)
+
+``` 
+ 
+ 
+## Conjuntos
+ 
+  - Para encontrar os valores exclusivos de um conjunto, vamos utilizar a escrita da seleção de elementos
+  - Podemos incluir a notação de "!", que quer dizer diferente
+  - Portanto, selecionamos os valores que estão contido no conjunto dos naturais, porém não no conjunto dos valores pares
+```{r}
+n.naturais[!is.element(n.naturais,n.pares)]
+
+``` 
+ 
+
+## Conjuntos
+ 
+  - Por fim, vamos testar se um valor está presente em um desses vetores
+  - Testaremos os valores 1, 11 e 21
+```{r}
+1 %in% c(n.naturais,n.pares)
+
+11 %in% c(n.naturais,n.pares)
+
+21 %in% c(n.naturais,n.pares)
+``` 
+  - Assim, não temos os valores 11 e 21 em nenhum dos vetores, entendidos como conjuntos 
+ 
 
 
 # data.frame
