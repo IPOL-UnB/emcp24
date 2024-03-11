@@ -162,14 +162,9 @@ mtcars %>% mutate(vs = factor(vs)) %>%
 
 - Recursos +
 
-- [cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/03/ggplot2-cheatsheet-portuguese.pdf)
-
-- [manual ggplot](https://ggplot2.tidyverse.org/reference/)
+- [manual ggplot - geometrias](https://ggplot2.tidyverse.org/reference/index.html#geoms)
 
 
-## geometrias
-
-<https://ggplot2.tidyverse.org/reference/index.html#section-layers>
 
 ## Estéticas `aes()`
 
@@ -373,13 +368,6 @@ O R Markdown integra vários pacotes R e ferramentas externas. então, use o che
 
 [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
 
-## Veja
-
-![](imgs/rmarkdown.pdf)
-
-## 
-
-![](imgs/rmarkdown-reference.pdf)
 
 ## Lógica, instalação e recursos adicionais
 
